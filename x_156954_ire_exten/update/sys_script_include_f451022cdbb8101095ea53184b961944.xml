@@ -10,6 +10,50 @@
         <script><![CDATA[var MapProcessor = Class.create();
 MapProcessor.prototype = {
     initialize: function() {},
+    //Start New Map Standardization Logic
+    standardizeItems: function(mapItems){
+        var obj = {};
+        for(var i  = 0; i < mapItems.length; i++){
+            var tableElement = mapItems[i];
+            obj[tableElement.className.value] = this.setItemValues(tableElement.values);
+        }
+
+        return obj;
+    },
+
+    setItemValues: function(values){
+        var obj = {};
+        for(var i = 0; i < values.length; i++){
+            var element = values[i];
+            obj[element.column.value] = {}
+            obj[element.column.value].key = element.objectKey.stack;
+            if(element.column.referenceTable && element.column.referenceField){
+                obj[element.column.value].referenceTable = element.column.referenceTable;
+                obj[element.column.value].referenceLookup = element.column.referenceField.value;
+            }
+        }
+
+        return obj;
+    },
+
+    standardizeRelationships: function(relations){
+        var relationArray = [];
+        for(var i = 0; i < relations.length; i++){
+            var rel = relations[i];
+            var relObj = {};
+            relObj.parent = rel.parent.value;;
+            relObj.child = rel.child.value;
+            relObj.type = rel.type.value;
+            relObj.referenceField = rel.child.referenceField.value;;
+            relationArray.push(relObj);
+        }
+        return relationArray;
+    },
+
+
+    //End Array Standardization Logic
+
+
 
     //Start Array Standaridzation Logic
     standardizeMap: function(keyArray) {
@@ -476,13 +520,13 @@ MapProcessor.prototype = {
         <sys_created_by>erik.anderson</sys_created_by>
         <sys_created_on>2020-05-12 12:39:00</sys_created_on>
         <sys_id>f451022cdbb8101095ea53184b961944</sys_id>
-        <sys_mod_count>73</sys_mod_count>
+        <sys_mod_count>78</sys_mod_count>
         <sys_name>MapProcessor</sys_name>
         <sys_package display_value="IRE Extension" source="x_156954_ire_exten">268ef9a8dbb8101095ea53184b9619c4</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="IRE Extension">268ef9a8dbb8101095ea53184b9619c4</sys_scope>
         <sys_update_name>sys_script_include_f451022cdbb8101095ea53184b961944</sys_update_name>
         <sys_updated_by>erik.anderson</sys_updated_by>
-        <sys_updated_on>2020-05-13 16:55:26</sys_updated_on>
+        <sys_updated_on>2020-06-16 02:08:53</sys_updated_on>
     </sys_script_include>
 </record_update>

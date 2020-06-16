@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_angular_provider">
+    <sp_angular_provider action="DELETE">
+        <name>setMaxHeight</name>
+        <script><![CDATA[(function(){
+	return{
+    link:function(scope,element){
+			scope.$watch( function() {
+				element.css('maxHeight', 'unset');
+				var offsetHeight = element[0].offsetHeight;
+				element.css('maxHeight', offsetHeight + 'px');
+				console.log(element[0].style.maxHeight);
+		});
+	}
+  };
+});
+
+]]></script>
+        <sys_class_name>sp_angular_provider</sys_class_name>
+        <sys_created_by>erik.anderson</sys_created_by>
+        <sys_created_on>2020-06-15 13:38:44</sys_created_on>
+        <sys_id>b904592b2f55d410a8ce2b5df699b6e8</sys_id>
+        <sys_mod_count>39</sys_mod_count>
+        <sys_name>setMaxHeight</sys_name>
+        <sys_package display_value="IRE Extension" source="x_156954_ire_exten">268ef9a8dbb8101095ea53184b9619c4</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IRE Extension">268ef9a8dbb8101095ea53184b9619c4</sys_scope>
+        <sys_update_name>sp_angular_provider_b904592b2f55d410a8ce2b5df699b6e8</sys_update_name>
+        <sys_updated_by>erik.anderson</sys_updated_by>
+        <sys_updated_on>2020-06-15 14:48:53</sys_updated_on>
+        <type>directive</type>
+    </sp_angular_provider>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="IRE Extension">268ef9a8dbb8101095ea53184b9619c4</application>
+        <file_path/>
+        <instance_id>54f0e1b4db429bc0536ad5b0cf9619dd</instance_id>
+        <instance_name>dev58956</instance_name>
+        <name>sp_angular_provider_b904592b2f55d410a8ce2b5df699b6e8</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sp_angular_provider"&gt;&lt;sp_angular_provider action="INSERT_OR_UPDATE"&gt;&lt;name&gt;setMaxHeight&lt;/name&gt;&lt;script&gt;&lt;![CDATA[(function(){
+	return{
+    link:function(scope,element){
+			scope.$watch( function() {
+				element.css('maxHeight', 'unset');
+				var offsetHeight = element[0].offsetHeight;
+				element.css('maxHeight', offsetHeight + 'px');
+				console.log(element[0].style.maxHeight);
+		});
+	}
+  };
+});
+
+]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sp_angular_provider&lt;/sys_class_name&gt;&lt;sys_created_by&gt;erik.anderson&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-06-15 13:38:44&lt;/sys_created_on&gt;&lt;sys_id&gt;b904592b2f55d410a8ce2b5df699b6e8&lt;/sys_id&gt;&lt;sys_mod_count&gt;39&lt;/sys_mod_count&gt;&lt;sys_name&gt;setMaxHeight&lt;/sys_name&gt;&lt;sys_package display_value="IRE Extension" source="x_156954_ire_exten"&gt;268ef9a8dbb8101095ea53184b9619c4&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="IRE Extension"&gt;268ef9a8dbb8101095ea53184b9619c4&lt;/sys_scope&gt;&lt;sys_update_name&gt;sp_angular_provider_b904592b2f55d410a8ce2b5df699b6e8&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;erik.anderson&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2020-06-15 14:48:53&lt;/sys_updated_on&gt;&lt;type&gt;directive&lt;/type&gt;&lt;/sp_angular_provider&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>77964556</payload_hash>
+        <record_name>setMaxHeight</record_name>
+        <reverted_from/>
+        <source>3494d480db11101095ea53184b9619dd</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>erik.anderson</sys_created_by>
+        <sys_created_on>2020-06-15 14:48:53</sys_created_on>
+        <sys_id>e72565e32f95d410a8ce2b5df699b65e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>172b8745d890000001</sys_recorded_at>
+        <sys_updated_by>erik.anderson</sys_updated_by>
+        <sys_updated_on>2020-06-15 14:48:53</sys_updated_on>
+        <type>Widget Angular Provider</type>
+        <update_guid>6f2565e32f95d41039aad16264e86f5d</update_guid>
+        <update_guid_history>6f2565e32f95d41039aad16264e86f5d:77964556,9c252da36395d410a08bcd1f24fb4444:1895489500,b944e9630595d4109ea493c3fb632399:77964556,c9442da39f95d410468974a426e74532:1895489500,5a63e9635e95d410eea14404e47a1bfc:77964556,c243e9635395d4109c108055d31f7341:-1900002336,480321638d95d410e92bc5df4ec8abf7:77964556,4b82ed23cd95d4106332bf9b28fcc333:-52706853,8832a5230395d4104d93f2dcc1ecb1a6:-752921530,688169237895d41098e999ba37b0301f:1733629555,4b5169ef5955d410b0a733343156bc80:-34780141,6451ad23f795d41097a60bf829ab35aa:1895489500,8db069ef4f55d4106b2cf3befdcc0d0e:-34780141,0e8061ef8a55d4103932719eb98619a1:1733629555,0c1f19ef0b55d4106d1db8ddf63ce5ec:-102343763,6a9e51ef6f55d410c830dcdf93c6499b:-1417186485,074e99af1a55d410188de5ca4c102d6f:1895489500,f31e9dafcd55d41085f13b1c7b8cedbb:669862041,941e99af8f55d4103901c49334078645:-1398552745,43ad99af3855d410b04bdbc4b5c77a40:-447272331,3c9dd5af3655d410d3f56cbcc4c14258:-1873448363,886dd96f4655d410f9d65d432296b11f:115400321,fe3dd96f9355d410d9761e32dec50397:638140139,6a2cddebfc55d410bec3a32b11caab97:-1705273190,a9fb116fc855d410631a32cf93535754:1189979759,cceb116f2c55d4103d7abf2d57cfe369:677856701,6f0bd52f3055d410bdbf478eca7b5b72:978223875,0f8addeb3155d4102817ec9ed8ff91b9:894580105,147a592fba55d41066284c56110c96ff:1617978982,d72a15eb2055d410350b64ee42c9b39a:894580105,3969ddeb9055d41094d4d98ac514441c:-635498813,24b855eb7b55d4109387103dec38bab3:-1404278796,c878d96b7255d41089e2dec60a902996:1617978982,c86815eb6455d41058c6367b52868986:-1404278796,e248d1ebd055d410e1400481308c536b:1363879431,5f2891eb4355d410e8a4ebb08eabf9bc:1617978982,51081d6b5055d4100eaace2f183a225b:-1404278796,50c5596b2555d410e0c79ad5f4fe65dd:1617978982,2075556b3255d4108f314983aa9dcc7c:-1189000716,8425592be555d410dad28ebcf07b05ee:-1379402401</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="setMaxHeight">648569e32f95d410a8ce2b5df699b637</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>erik.anderson</sys_created_by>
+        <sys_created_on>2020-06-15 14:50:19</sys_created_on>
+        <sys_db_object display_value="" name="sp_angular_provider">sp_angular_provider</sys_db_object>
+        <sys_id>0703ed2448bb405880390201eea8e010</sys_id>
+        <sys_metadata>b904592b2f55d410a8ce2b5df699b6e8</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>setMaxHeight</sys_name>
+        <sys_package display_value="IRE Extension" source="x_156954_ire_exten">268ef9a8dbb8101095ea53184b9619c4</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="IRE Extension">268ef9a8dbb8101095ea53184b9619c4</sys_scope>
+        <sys_scope_delete display_value="">59d8130f12214fc093409d2c3163d010</sys_scope_delete>
+        <sys_update_name>sp_angular_provider_b904592b2f55d410a8ce2b5df699b6e8</sys_update_name>
+        <sys_update_version display_value="sp_angular_provider_b904592b2f55d410a8ce2b5df699b6e8">e72565e32f95d410a8ce2b5df699b65e</sys_update_version>
+        <sys_updated_by>erik.anderson</sys_updated_by>
+        <sys_updated_on>2020-06-15 14:50:19</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
