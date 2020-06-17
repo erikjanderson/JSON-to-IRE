@@ -21,199 +21,508 @@
 	c.compressOrExpandAllColumns = compressOrExpandAllColumns;
 	c.buildRelationshipQuery = buildRelationshipQuery;
 	c.previewMap = previewMap;
+	c.testIandR = testIandR;
 	
 	
 	c.showHideChildElements = showHideChildElements;
 	
 	c.ireModel = {
-    "items": [
+  "items": [
+    {
+      "className": {
+        "value": "cmdb_ci_computer",
+        "displayValue": "Computer",
+        "table": "cmdb_ci_computer"
+      },
+      "values": [
         {
-            "className": {
-                "value": "cmdb_ci_computer",
-                "displayValue": "Computer",
-                "table": "cmdb_ci_computer"
-            },
-            "values": [
-                {
-                    "column": {
-                        "value": "name",
-                        "displayValue": "Name",
-                        "table": "sys_dictionary",
-                        "parentTable": "cmdb_ci_computer",
-                        "referenceField": {
-                            "value": "",
-                            "displayValue": ""
-                        }
-                    },
-                    "objectKey": {
-                        "stack": "general.name",
-                        "level": 1,
-                        "type": "string",
-                        "value": "Test1’s MacBook Pro",
-                        "key": "name"
-                    }
-                },
-                {
-                    "column": {
-                        "value": "ip_address",
-                        "displayValue": "IP Address",
-                        "table": "sys_dictionary",
-                        "parentTable": "cmdb_ci_computer",
-                        "referenceField": {
-                            "value": "",
-                            "displayValue": ""
-                        }
-                    },
-                    "objectKey": {
-                        "stack": "general.ip_address",
-                        "level": 0,
-                        "type": "string",
-                        "value": "47.225.174.98",
-                        "key": "ip_address"
-                    }
-                },
-                {
-                    "column": {
-                        "value": "assigned_to",
-                        "displayValue": "Assigned to",
-                        "table": "sys_dictionary",
-                        "parentTable": "cmdb_ci_computer",
-                        "referenceField": {
-                            "value": "email",
-                            "displayValue": "Email"
-                        },
-                        "referenceTable": "sys_user"
-                    },
-                    "objectKey": {
-                        "stack": "location.email_address",
-                        "level": 0,
-                        "type": "string",
-                        "value": "eanderson@itsdelivers.com",
-                        "key": "email_address"
-                    }
-                }
-            ],
-            "compress": true
+          "column": {
+            "value": "model_number",
+            "displayValue": "Model number",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_computer",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "hardware.model_identifier",
+            "level": 1,
+            "type": "string",
+            "value": "MacBookPro11,3",
+            "key": "model_identifier",
+            "hidden": false
+          },
+          "compress": true
         },
         {
-            "className": {
-                "value": "cmdb_ci_disk",
-                "displayValue": "Disk",
-                "table": "cmdb_ci_computer"
+          "column": {
+            "value": "model_id",
+            "displayValue": "Model ID",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_computer",
+            "referenceField": {
+              "value": "name",
+              "displayValue": "Name"
             },
-            "values": [
-                {
-                    "column": {
-                        "value": "size",
-                        "displayValue": "Size",
-                        "table": "sys_dictionary",
-                        "parentTable": "cmdb_ci_disk",
-                        "referenceField": {
-                            "value": "",
-                            "displayValue": ""
-                        }
-                    },
-                    "objectKey": {
-                        "stack": "hardware.storage.size",
-                        "level": 2,
-                        "type": "number",
-                        "value": 1048576,
-                        "key": "size",
-                        "hidden": false
-                    },
-                    "compress": true
-                },
-                {
-                    "column": {
-                        "value": "serial_number",
-                        "displayValue": "Serial number",
-                        "table": "sys_dictionary",
-                        "parentTable": "cmdb_ci_disk",
-                        "referenceField": {
-                            "value": "",
-                            "displayValue": ""
-                        }
-                    },
-                    "objectKey": {
-                        "stack": "hardware.storage.serial_number",
-                        "level": 2,
-                        "type": "string",
-                        "value": "S1K6NYAFC36492",
-                        "key": "serial_number",
-                        "hidden": false
-                    },
-                    "compress": true
-                },
-                {
-                    "column": {
-                        "value": "model_id",
-                        "displayValue": "Model ID",
-                        "table": "sys_dictionary",
-                        "parentTable": "cmdb_ci_disk",
-                        "referenceField": {
-                            "value": "name",
-                            "displayValue": "Name"
-                        },
-                        "referenceTable": "cmdb_model"
-                    },
-                    "objectKey": {
-                        "stack": "hardware.storage.model",
-                        "level": 2,
-                        "type": "string",
-                        "value": "APPLE SSD SM1024F",
-                        "key": "model",
-                        "hidden": false
-                    },
-                    "compress": true
-                },
-                {
-                    "column": {
-                        "value": "name",
-                        "displayValue": "Name",
-                        "table": "sys_dictionary",
-                        "parentTable": "cmdb_ci_disk",
-                        "referenceField": {
-                            "value": "",
-                            "displayValue": ""
-                        }
-                    },
-                    "objectKey": {
-                        "stack": "hardware.storage.disk",
-                        "level": 2,
-                        "type": "string",
-                        "value": "disk0",
-                        "key": "disk",
-                        "hidden": false
-                    },
-                    "compress": true
-                }
-            ],
-            "compress": true
-        }
-    ],
-    "relations": [
+            "referenceTable": "cmdb_model"
+          },
+          "objectKey": {
+            "stack": "hardware.model",
+            "level": 1,
+            "type": "string",
+            "value": "15-inch Retina MacBook Pro (Late 2013)",
+            "key": "model",
+            "hidden": false
+          },
+          "compress": true
+        },
         {
-            "parent": {
-                "displayValue": "Computer",
-                "value": "cmdb_ci_computer"
-            },
-            "child": {
-                "displayValue": "Disk",
-                "value": "cmdb_ci_disk",
-								"type": "child",
-								"referenceField": {
-									"displayValue": "Computer",
-									"value": "computer",
-									"referenceTable": ""
-								}
-            },
-            
-            "type": {
-                "displayValue": "Contains::Contained by",
-                "value": "Contains::Contained by"
+          "column": {
+            "value": "cpu_core_count",
+            "displayValue": "CPU core count",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_computer",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
             }
+          },
+          "objectKey": {
+            "stack": "hardware.number_cores",
+            "level": 1,
+            "type": "number",
+            "value": 4,
+            "key": "number_cores",
+            "hidden": false
+          },
+          "compress": true
+        },
+        {
+          "column": {
+            "value": "ram",
+            "displayValue": "RAM (MB)",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_computer",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "hardware.total_ram_mb",
+            "level": 1,
+            "type": "number",
+            "value": 16384,
+            "key": "total_ram_mb",
+            "hidden": false
+          },
+          "compress": true
+        },
+        {
+          "column": {
+            "value": "cpu_count",
+            "displayValue": "CPU count",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_computer",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "hardware.number_processors",
+            "level": 1,
+            "type": "number",
+            "value": 1,
+            "key": "number_processors",
+            "hidden": false
+          },
+          "compress": true
+        },
+        {
+          "column": {
+            "value": "os_version",
+            "displayValue": "OS Version",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_computer",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "hardware.os_version",
+            "level": 1,
+            "type": "string",
+            "value": "10.15.4",
+            "key": "os_version",
+            "hidden": false,
+            "showDetails": true
+          },
+          "compress": true
+        },
+        {
+          "column": {
+            "value": "os",
+            "displayValue": "Operating System",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_computer",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "hardware.os_name",
+            "level": 1,
+            "type": "string",
+            "value": "Mac OS X",
+            "key": "os_name",
+            "hidden": false,
+            "showDetails": true
+          },
+          "compress": true
+        },
+        {
+          "column": {
+            "value": "serial_number",
+            "displayValue": "Serial number",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_computer",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "general.serial_number",
+            "level": 1,
+            "type": "string",
+            "value": "C02P720XG3QP",
+            "key": "serial_number",
+            "hidden": false
+          },
+          "compress": true
+        },
+        {
+          "column": {
+            "value": "asset_tag",
+            "displayValue": "Asset tag",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_computer",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "general.asset_tag",
+            "level": 1,
+            "type": "string",
+            "value": "ITSASSET23456",
+            "key": "asset_tag",
+            "hidden": false
+          },
+          "compress": true
+        },
+        {
+          "column": {
+            "value": "mac_address",
+            "displayValue": "MAC Address",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_computer",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "general.mac_address",
+            "level": 1,
+            "type": "string",
+            "value": "34:36:3B:CC:71:36",
+            "key": "mac_address",
+            "hidden": false
+          },
+          "compress": true
+        },
+        {
+          "column": {
+            "value": "name",
+            "displayValue": "Name",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_computer",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "general.name",
+            "level": 1,
+            "type": "string",
+            "value": "Test1’s MacBook Pro",
+            "key": "name"
+          },
+          "compress": true
+        },
+        {
+          "column": {
+            "value": "ip_address",
+            "displayValue": "IP Address",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_computer",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "general.ip_address",
+            "level": 0,
+            "type": "string",
+            "value": "47.225.174.98",
+            "key": "ip_address"
+          },
+          "compress": true
+        },
+        {
+          "column": {
+            "value": "assigned_to",
+            "displayValue": "Assigned to",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_computer",
+            "referenceField": {
+              "value": "user_name",
+              "displayValue": "User ID"
+            },
+            "referenceTable": "sys_user"
+          },
+          "objectKey": {
+            "stack": "location.username",
+            "level": 1,
+            "type": "string",
+            "value": "erik.anderson",
+            "key": "username",
+            "hidden": false,
+            "showDetails": false
+          },
+          "compress": true
         }
-    ]
+      ],
+      "compress": false
+    },
+    {
+      "className": {
+        "value": "cmdb_ci_disk",
+        "displayValue": "Disk",
+        "table": "cmdb_ci_computer"
+      },
+      "values": [
+        {
+          "column": {
+            "value": "size",
+            "displayValue": "Size",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_disk",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "hardware.storage.size",
+            "level": 2,
+            "type": "number",
+            "value": 1048576,
+            "key": "size",
+            "hidden": false
+          },
+          "compress": true
+        },
+        {
+          "column": {
+            "value": "serial_number",
+            "displayValue": "Serial number",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_disk",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "hardware.storage.serial_number",
+            "level": 2,
+            "type": "string",
+            "value": "S1K6NYAFC36492",
+            "key": "serial_number",
+            "hidden": false
+          },
+          "compress": true
+        },
+        {
+          "column": {
+            "value": "model_id",
+            "displayValue": "Model ID",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_disk",
+            "referenceField": {
+              "value": "name",
+              "displayValue": "Name"
+            },
+            "referenceTable": "cmdb_model"
+          },
+          "objectKey": {
+            "stack": "hardware.storage.model",
+            "level": 2,
+            "type": "string",
+            "value": "APPLE SSD SM1024F",
+            "key": "model",
+            "hidden": false
+          },
+          "compress": true
+        },
+        {
+          "column": {
+            "value": "name",
+            "displayValue": "Name",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_disk",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "hardware.storage.disk",
+            "level": 2,
+            "type": "string",
+            "value": "disk0",
+            "key": "disk",
+            "hidden": false
+          },
+          "compress": true
+        }
+      ],
+      "compress": true
+    },
+    {
+      "className": {
+        "value": "cmdb_ci_disk_partition",
+        "displayValue": "Disk Partition",
+        "table": "cmdb_ci_computer"
+      },
+      "values": [
+        {
+          "column": {
+            "value": "size",
+            "displayValue": "Size",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_disk_partition",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "hardware.storage.partitions.size",
+            "level": 3,
+            "type": "number",
+            "value": 954004,
+            "key": "size",
+            "hidden": false
+          }
+        },
+        {
+          "column": {
+            "value": "name",
+            "displayValue": "Name",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_disk_partition",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "hardware.storage.partitions.name",
+            "level": 3,
+            "type": "string",
+            "value": "Data",
+            "key": "name",
+            "hidden": false
+          }
+        }
+      ],
+      "compress": true
+    }
+  ],
+  "relations": [
+    {
+      "parent": {
+        "displayValue": "Disk",
+        "value": "cmdb_ci_disk"
+      },
+      "child": {
+        "displayValue": "Disk Partition",
+        "value": "cmdb_ci_disk_partition",
+        "type": "child",
+        "referenceField": {
+          "displayValue": "Disk",
+          "value": "disk"
+        }
+      },
+      "type": {
+        "displayValue": "Contains::Contained by",
+        "value": "Contains::Contained by"
+      },
+      "compress": true
+    },
+    {
+      "parent": {
+        "displayValue": "Computer",
+        "value": "cmdb_ci_computer"
+      },
+      "child": {
+        "displayValue": "Disk Partition",
+        "value": "cmdb_ci_disk_partition",
+        "type": "child",
+        "referenceField": {
+          "displayValue": "Computer",
+          "value": "computer"
+        }
+      },
+      "type": {
+        "displayValue": "Contains::Contained by",
+        "value": "Contains::Contained by"
+      },
+      "compress": true
+    },
+    {
+      "parent": {
+        "displayValue": "Computer",
+        "value": "cmdb_ci_computer"
+      },
+      "child": {
+        "displayValue": "Disk",
+        "value": "cmdb_ci_disk",
+        "type": "child",
+        "referenceField": {
+          "displayValue": "Computer",
+          "value": "computer",
+          "referenceTable": ""
+        }
+      },
+      "type": {
+        "displayValue": "Contains::Contained by",
+        "value": "Contains::Contained by"
+      },
+      "compress": true
+    }
+  ]
 };
 	
 	// tracks changes on <sn-record-picker> records
@@ -302,15 +611,36 @@
 	}
 	
 	function previewMap(){
+		c.previewOutput = '';
+		c.previewInput = '';
+		c.simplifiedModel = '';
 		var input = {
 			action: 'previewMap',
-			map:  c.ireModel
+			map:  c.ireModel,
+			payload: c.payload
 		};
 		c.server
 			.get(input)
 			.then(function(response){
-			if(response && response.data){
+			if(response && response.data && response.data.previewInput && response.data.simplifiedModel){
+				c.simplifiedModel = response.data.simplifiedModel
+				c.previewInput = response.data.previewInput;	
+				c.previewTab = 'Preview';
 				$('#previewModal').modal("show");
+			}
+		});
+	}
+	
+	function testIandR(){
+		var input = {
+			action: 'testIandR',
+			sampleInput: c.previewInput
+		}
+		c.server
+			.get(input)
+			.then(function(response){
+			if(response && response.data && response.data.previewOutput){
+				c.previewOutput = response.data.previewOutput;
 			}
 		});
 	}
@@ -825,13 +1155,17 @@ button.cancel {
   padding: 14px 16px;
   transition: 0.3s;
   font-size: 17px;
-  width: 40%;
+  width: 49%;
 }
 
 /* Change background color of buttons on hover */
 .tab button:hover {
   background-color: #ddd;
   
+}
+
+.tab .selected {
+	background-color: #ddd;
 }
 
 /* Create an active/current tablink class */
@@ -849,6 +1183,10 @@ button.cancel {
 
 #previewModal pre {
 	max-height: 80vh;
+}
+
+#previewModal .modal-header {
+	 padding-bottom: 3px;
 }
 </css>
         <data_table>sp_instance</data_table>
@@ -870,6 +1208,7 @@ button.cancel {
 
 	if(input){
 		var uiHelper = new IREMapUIHelper();
+		var ireMap = new IREMap();
 		if(input.action === 'analyzePayload' && input.payload){
 			
 			data.array = uiHelper.analyzePayload(input.payload);
@@ -880,8 +1219,18 @@ button.cancel {
 			data.referenceTable = uiHelper.getReferenceTable(input.table, input.element);
 		}
 		
-		if(input.action === 'previewMap' && input.map){
-			data.t = 'g'
+		if(input.action === 'previewMap' && input.map && input.payload){
+			
+			var simplifiedModel = uiHelper.constructSimplifiedMap(input.map);
+			data.simplifiedModel = simplifiedModel;
+			var relationalMap = ireMap.initializeMap(input.map);
+			var ireObj = ireMap.processObj(JSON.parse(input.payload), 'ServiceNow');
+			data.previewInput = ireObj;
+		}
+		
+		if(input.action === 'testIandR' && input.sampleInput){
+			var output = ireMap.importPayload(input.sampleInput, 'ServiceNow');
+			data.previewOutput = JSON.parse(output);
 		}
 	}
 	
@@ -893,19 +1242,19 @@ button.cancel {
         <sys_created_by>erik.anderson</sys_created_by>
         <sys_created_on>2020-05-14 13:51:19</sys_created_on>
         <sys_id>cc2560d5db30101095ea53184b96198a</sys_id>
-        <sys_mod_count>647</sys_mod_count>
+        <sys_mod_count>675</sys_mod_count>
         <sys_name>Mapping Helper</sys_name>
         <sys_package display_value="IRE Extension" source="x_156954_ire_exten">268ef9a8dbb8101095ea53184b9619c4</sys_package>
         <sys_policy/>
         <sys_scope display_value="IRE Extension">268ef9a8dbb8101095ea53184b9619c4</sys_scope>
         <sys_update_name>sp_widget_cc2560d5db30101095ea53184b96198a</sys_update_name>
         <sys_updated_by>erik.anderson</sys_updated_by>
-        <sys_updated_on>2020-06-16 02:37:22</sys_updated_on>
+        <sys_updated_on>2020-06-16 21:09:32</sys_updated_on>
         <template><![CDATA[<div>
     <!--<label>{{c.ireModel}}</label>-->
     <div class="col-sm-12">
         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#priamryModal">Load Payload</button>
-				<button type="button" class="btn btn-success" ng-click="c.previewMap()">
+				<button type="button" class="btn btn-success" ng-click="c.previewMap()" ng-disabled="!c.payload || !c.ireModel">
           Preview Map
       </button>
     </div>
@@ -1152,15 +1501,26 @@ button.cancel {
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <div class="tab">
-          <button class="tablinks" ng-click="c.previewTab ='Preview'">Map Preview</button>
-          <button class="tablinks" ng-click="c.previewTab ='Output'">Sample Output</button>
-      </div>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <div class="tab">
+          <button  ng-class="{'tablinks selected' : c.previewTab ==='Preview' , 'tablinks': c.previewTab !== 'Preview'}" ng-click="c.previewTab ='Preview'">Map Preview</button>
+          <button ng-class="{'tablinks selected' : c.previewTab ==='Input' , 'tablinks': c.previewTab !== 'Input'}" ng-click="c.previewTab ='Input'">Sample IRE Input</button>
+      	</div>
+        
       </div>
        <div class="modal-body">
          <div ng-if="c.previewTab === 'Preview'">
-           <pre class="customScroll">{{c.ireModel | json}}</pre>
+           <pre class="customScroll">{{c.simplifiedModel | json}}</pre>
+         </div>
+         
+         <div ng-if="c.previewTab === 'Input'">
+           <pre class="customScroll">{{c.previewInput | json}}</pre>
+           
+           <pre ng-if="c.previewOutput" class="customScroll">{{c.previewOutput | json}}</pre>
+           
+           <button class="btn btn-primary" ng-click="c.testIandR()">
+             Test Identify and Reconcile
+           </button>
          </div>
          
       </div>

@@ -109,6 +109,55 @@ IREMapUIHelper.prototype = {
 		return type;
     },
 	
+	constructSimplifiedMap: function(viewModel){
+		for(var i = 0; i < viewModel.items.length; i++){
+			var table = viewModel.items[i];
+			delete table.className.displayValue;
+			delete table.className.table;
+			delete table.compress;
+
+			table.values = this.simplifiyValues(table.values);
+		}			
+		if(viewModel.relations && viewModel.relations.length > 0){
+			viewModel.relations = this.simplifyRelations(viewModel.relations);	
+		}
+		return viewModel;
+	},
+
+	simplifiyValues: function(valuesArray){
+		for(var i = 0; i < valuesArray.length; i++){
+			var value = valuesArray[i];
+			delete value.compress;
+			delete value.column.displayValue;
+			delete value.column.table;
+			delete value.column.parentTable;
+			if(!value.column.referenceField.value){
+				delete value.column.referenceField;
+			}
+
+			delete value.objectKey.hidden;
+			delete value.objectKey.level;
+			delete value.objectKey.type;
+			delete value.objectKey.type;
+			delete value.objectKey.value;
+			delete value.objectKey.key;
+
+		}
+		return valuesArray;
+	},
+
+	simplifyRelations: function(relationsArray){
+		for(var i = 0; i < relationsArray.length; i++){
+			var relationship = relationsArray[i];
+			delete relationship.parent.displayValue;
+			delete relationship.child.displayValue;
+			delete relationship.child.type;
+			delete relationship.type.displayValue;
+			delete relationship.compress;
+		}
+		return relationsArray;
+	},
+	
 	PayloadElement: function(stack, key, value, level, type){
 		this.stack = stack;
 		this.key = key;
@@ -121,19 +170,21 @@ IREMapUIHelper.prototype = {
 		this.level = level;
 		this.type = type;
 	},
+	
+	
     type: 'IREMapUIHelper'
 };]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>erik.anderson</sys_created_by>
         <sys_created_on>2020-05-18 20:43:39</sys_created_on>
         <sys_id>44d9e66edb30101095ea53184b9619c1</sys_id>
-        <sys_mod_count>20</sys_mod_count>
+        <sys_mod_count>39</sys_mod_count>
         <sys_name>IREMapUIHelper</sys_name>
         <sys_package display_value="IRE Extension" source="x_156954_ire_exten">268ef9a8dbb8101095ea53184b9619c4</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="IRE Extension">268ef9a8dbb8101095ea53184b9619c4</sys_scope>
         <sys_update_name>sys_script_include_44d9e66edb30101095ea53184b9619c1</sys_update_name>
         <sys_updated_by>erik.anderson</sys_updated_by>
-        <sys_updated_on>2020-05-21 03:15:16</sys_updated_on>
+        <sys_updated_on>2020-06-16 20:52:33</sys_updated_on>
     </sys_script_include>
 </record_update>

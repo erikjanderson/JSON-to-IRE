@@ -25,7 +25,7 @@ MapProcessor.prototype = {
         var obj = {};
         for(var i = 0; i < values.length; i++){
             var element = values[i];
-            obj[element.column.value] = {}
+            obj[element.column.value] = {};
             obj[element.column.value].key = element.objectKey.stack;
             if(element.column.referenceTable && element.column.referenceField){
                 obj[element.column.value].referenceTable = element.column.referenceTable;
@@ -56,6 +56,101 @@ MapProcessor.prototype = {
 
 
     //Start Array Standaridzation Logic
+
+    nestRelationships2: function(standardMap, relationships){
+        var itemArray = [];
+        for(var table in standardMap){
+            var foundRleationships = this.findExistingRelationships(table, relationships);
+            if(foundRleationships.parent.length > 0){
+                var itemArray = this.setParentRelationships(itemArray, foundRleationships.parent, table, standardMap);
+            }
+        }
+       return this.combineItemArray(itemArray, relationships);
+    },
+
+    combineItemArray: function(itemArray){
+        var enteredClasses = {};
+        var mainArray = [];
+        for(var i = 0; i < itemArray.length; i++){
+            var parentTable = itemArray[i];
+            var parentClassName = parentTable.className;
+            var childClassName = parentTable.relations[0].className;
+            if(!enteredClasses[parentClassName] && !enteredClasses[childClassName]){
+                parentTable.relations[0].isPrimary = true;
+                mainArray.push(parentTable)
+                enteredClasses[parentClassName] = true;
+                enteredClasses[parentTable.relations[0].className] = true;
+            }else if(enteredClasses[parentClassName] && !enteredClasses[childClassName]){
+                mainArray = this.addChildToAllParents(mainArray, parentTable.relations[0], parentClassName, true);
+                enteredClasses[childClassName] = true;
+            }else if(!enteredClasses[parentClassName] && enteredClasses[childClassName]){
+                gs.info('no this lul');
+            }else if(enteredClasses[parentClassName] && enteredClasses[childClassName]){
+                mainArray = this.addChildToAllParents(mainArray, parentTable.relations[0], parentClassName, false);
+            }
+        }
+        return mainArray;
+    },
+
+    addChildToAllParents: function(mainArray, child, parentClass, primary){
+        
+        for(var i = 0; i < mainArray.length; i++){
+            var element = mainArray[i];
+            if(element.relations.length > 0){
+                mainArray[i].relations = this.addChildToAllParents(mainArray[i].relations, child, parentClass);
+            }
+            if(element.className === parentClass){
+                child.isPrimary = primary;
+                mainArray[i].relations.push(child);
+            }
+        }
+        return mainArray;
+    },
+
+
+    findFirstParent: function(table, itemArray){
+        for(var i = 0; i < itemArray.length; i++){
+            if(itemArray[i].className === table){
+                return itemArray[i];
+            }
+        }
+    },
+
+    setParentRelationships: function(itemArray, parentRelationships, tableName, standardMap){
+        
+        for(var i = 0; i < parentRelationships.length; i++){
+            var relationship = parentRelationships[i];
+            var parentValues = standardMap[relationship.parent];
+            var childValues = standardMap[relationship.child];
+            var obj = this.buildNestObj(relationship.parent, parentValues, true);
+            obj.relations.push(this.buildNestObj(relationship.child, childValues, true, relationship.referenceField));
+            itemArray.push(obj);
+        }
+        return itemArray;
+    },
+
+    findExistingRelationships: function(tableName, relationships){
+        var discoveredRelationships = {
+            parent: [],
+            child: []
+        };
+        for(var i = 0; i < relationships.length; i++){
+            var relationship = relationships[i];
+            if(relationship.parent === tableName){
+                discoveredRelationships.parent.push(relationship);
+            }else if(relationship.child === tableName){
+                discoveredRelationships.child.push(relationship);
+            }
+        }
+        return discoveredRelationships;
+    },
+
+
+
+
+
+
+
     standardizeMap: function(keyArray) {
         var obj = {};
         for (var key in keyArray) {
@@ -114,6 +209,7 @@ MapProcessor.prototype = {
 
                 returnArray = this.setNonPrimaryRelationship(returnArray, rel);
             }
+            gs.info('return: ' + JSON.stringify(returnArray));
         }
         return returnArray;
     },
@@ -204,7 +300,6 @@ MapProcessor.prototype = {
     },
 
     buildNestObj: function(table, values, isPrimary, referenceField) {
-        //gs.info('d'+referenceField)
         var returnObj = {};
         returnObj.className = table;
         if(isPrimary){
@@ -265,9 +360,8 @@ MapProcessor.prototype = {
         for (var i = 0; i < map.length; i++) {
             var element = map[i];
             var valueArray = this.extractValues(element.values, obj, indexTrack);
-            //gs.info('value array: ' +  JSON.stringify(valueArray));
             for (var v = 0; v < valueArray.length; v++) {
-                var getGuidObj = this.getGuid(valueArray[v], element.className, tableIndexTrack)
+                var getGuidObj = this.getGuid(valueArray[v], element.className, tableIndexTrack);
                 var guid = getGuidObj.guid;
                 tableIndexTrack = getGuidObj.tableIndexTrack;
                 var newObj = {};
@@ -294,7 +388,7 @@ MapProcessor.prototype = {
         var guid = '';
         if(valueElement.indexTrack && valueElement.indexTrack.length > 0){
             if(!tableIndexTrack[className]){
-                tableIndexTrack[className] = {}
+                tableIndexTrack[className] = {};
             }
             if(tableIndexTrack[className][JSON.stringify(valueElement.indexTrack)]){
                 guid = tableIndexTrack[className][JSON.stringify(valueElement.indexTrack)];
@@ -309,7 +403,7 @@ MapProcessor.prototype = {
         return {
             guid:  guid,
             tableIndexTrack: tableIndexTrack
-        }
+        };
     },
 
     extractValues: function(values, obj, indexTrack) {
@@ -477,7 +571,6 @@ MapProcessor.prototype = {
             var element = array[i];
             if(element.isPrimary){
                 if(element.internal_id === internal_id){
-                    //gs.info('found it: '  + element.internal_id);
                     foundElement = element;
                     break;
                 }
@@ -520,13 +613,13 @@ MapProcessor.prototype = {
         <sys_created_by>erik.anderson</sys_created_by>
         <sys_created_on>2020-05-12 12:39:00</sys_created_on>
         <sys_id>f451022cdbb8101095ea53184b961944</sys_id>
-        <sys_mod_count>78</sys_mod_count>
+        <sys_mod_count>107</sys_mod_count>
         <sys_name>MapProcessor</sys_name>
         <sys_package display_value="IRE Extension" source="x_156954_ire_exten">268ef9a8dbb8101095ea53184b9619c4</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="IRE Extension">268ef9a8dbb8101095ea53184b9619c4</sys_scope>
         <sys_update_name>sys_script_include_f451022cdbb8101095ea53184b961944</sys_update_name>
         <sys_updated_by>erik.anderson</sys_updated_by>
-        <sys_updated_on>2020-06-16 02:08:53</sys_updated_on>
+        <sys_updated_on>2020-06-17 03:20:46</sys_updated_on>
     </sys_script_include>
 </record_update>

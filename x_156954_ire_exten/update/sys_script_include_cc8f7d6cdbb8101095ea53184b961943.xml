@@ -20,7 +20,8 @@ IREMap.prototype = {
         var standardMap = this.processor.standardizeItems(map.items);
         gs.info(JSON.stringify(standardMap));
         var relationships = this.processor.standardizeRelationships(map.relations);
-        var relationalMap = this.processor.nestRelationships(standardMap, relationships);
+        gs.info(JSON.stringify(relationships))
+        var relationalMap = this.processor.nestRelationships2(standardMap, relationships);
         this.map = relationalMap;
         return relationalMap;
     },
@@ -36,7 +37,6 @@ IREMap.prototype = {
 	processObj: function(obj) {
         if(this.map){
             var array = this.processor.processObject(this.map, obj);
-            gs.info(JSON.stringify(array));
             var ireObj = this.processor.formatArrayForIRE(array);
             return ireObj;
         }
@@ -55,13 +55,13 @@ IREMap.prototype = {
         <sys_created_by>erik.anderson</sys_created_by>
         <sys_created_on>2020-05-12 12:38:24</sys_created_on>
         <sys_id>cc8f7d6cdbb8101095ea53184b961943</sys_id>
-        <sys_mod_count>25</sys_mod_count>
+        <sys_mod_count>37</sys_mod_count>
         <sys_name>IREMap</sys_name>
         <sys_package display_value="IRE Extension" source="x_156954_ire_exten">268ef9a8dbb8101095ea53184b9619c4</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="IRE Extension">268ef9a8dbb8101095ea53184b9619c4</sys_scope>
         <sys_update_name>sys_script_include_cc8f7d6cdbb8101095ea53184b961943</sys_update_name>
         <sys_updated_by>erik.anderson</sys_updated_by>
-        <sys_updated_on>2020-06-16 02:12:57</sys_updated_on>
+        <sys_updated_on>2020-06-17 03:20:03</sys_updated_on>
     </sys_script_include>
 </record_update>
