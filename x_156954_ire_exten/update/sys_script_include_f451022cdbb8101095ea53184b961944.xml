@@ -38,15 +38,17 @@ MapProcessor.prototype = {
 
     standardizeRelationships: function(relations){
         var relationArray = [];
-        for(var i = 0; i < relations.length; i++){
-            var rel = relations[i];
-            var relObj = {};
-            relObj.parent = rel.parent.value;;
-            relObj.child = rel.child.value;
-            relObj.type = rel.type.value;
-            relObj.referenceField = rel.child.referenceField.value;;
-            relationArray.push(relObj);
-        }
+		if(relations){
+			for(var i = 0; i < relations.length; i++){
+				var rel = relations[i];
+				var relObj = {};
+				relObj.parent = rel.parent.value;;
+				relObj.child = rel.child.value;
+				relObj.type = rel.type.value;
+				relObj.referenceField = rel.child.referenceField.value;;
+				relationArray.push(relObj);
+			}
+		}
         return relationArray;
     },
 
@@ -58,13 +60,20 @@ MapProcessor.prototype = {
     //Start Array Standaridzation Logic
 
     nestRelationships2: function(standardMap, relationships){
-        var itemArray = [];
+        var itemArray = []; 
         for(var table in standardMap){
-            var foundRleationships = this.findExistingRelationships(table, relationships);
-            if(foundRleationships.parent.length > 0){
-                var itemArray = this.setParentRelationships(itemArray, foundRleationships.parent, table, standardMap);
-            }
+			if(relationships.length > 0){
+				var foundRleationships = this.findExistingRelationships(table, relationships);
+				if(foundRleationships.parent.length > 0){
+					itemArray = this.setParentRelationships(itemArray, foundRleationships.parent, table, standardMap);
+				}
+			}else{
+				//gs.info('yo wft:  ' + JSON.stringify(this.buildNestObj(table, standardMap[table], true)));
+				itemArray.push(this.buildNestObj(table, standardMap[table], true));
+			}
+            
         }
+		gs.info('ERIK2222:' + JSON.stringify(itemArray));
        return this.combineItemArray(itemArray, relationships);
     },
 
@@ -74,12 +83,20 @@ MapProcessor.prototype = {
         for(var i = 0; i < itemArray.length; i++){
             var parentTable = itemArray[i];
             var parentClassName = parentTable.className;
-            var childClassName = parentTable.relations[0].className;
+			var childClassName = '';
+			if(parentTable.relations && parentTable.relations.length > 0){
+				childClassName = parentTable.relations[0].className;
+			}
+            
             if(!enteredClasses[parentClassName] && !enteredClasses[childClassName]){
-                parentTable.relations[0].isPrimary = true;
-                mainArray.push(parentTable)
+				if(parentTable.relations && parentTable.relations.length > 0){
+					 parentTable.relations[0].isPrimary = true;
+				}
+                mainArray.push(parentTable);
                 enteredClasses[parentClassName] = true;
-                enteredClasses[parentTable.relations[0].className] = true;
+				if(parentTable.relations && parentTable.relations.length > 0){
+					enteredClasses[parentTable.relations[0].className] = true;
+				}
             }else if(enteredClasses[parentClassName] && !enteredClasses[childClassName]){
                 mainArray = this.addChildToAllParents(mainArray, parentTable.relations[0], parentClassName, true);
                 enteredClasses[childClassName] = true;
@@ -613,13 +630,13 @@ MapProcessor.prototype = {
         <sys_created_by>erik.anderson</sys_created_by>
         <sys_created_on>2020-05-12 12:39:00</sys_created_on>
         <sys_id>f451022cdbb8101095ea53184b961944</sys_id>
-        <sys_mod_count>107</sys_mod_count>
+        <sys_mod_count>115</sys_mod_count>
         <sys_name>MapProcessor</sys_name>
         <sys_package display_value="IRE Extension" source="x_156954_ire_exten">268ef9a8dbb8101095ea53184b9619c4</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="IRE Extension">268ef9a8dbb8101095ea53184b9619c4</sys_scope>
         <sys_update_name>sys_script_include_f451022cdbb8101095ea53184b961944</sys_update_name>
         <sys_updated_by>erik.anderson</sys_updated_by>
-        <sys_updated_on>2020-06-17 03:20:46</sys_updated_on>
+        <sys_updated_on>2020-07-08 18:08:00</sys_updated_on>
     </sys_script_include>
 </record_update>

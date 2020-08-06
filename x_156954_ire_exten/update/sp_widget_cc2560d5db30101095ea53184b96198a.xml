@@ -25,8 +25,13 @@
 	
 	
 	c.showHideChildElements = showHideChildElements;
-	
+	c.modalPaneType ='Tables';
 	c.ireModel = {
+		items: [],
+		relationships: []
+	}
+	
+/*	c.ireModel = {
   "items": [
     {
       "className": {
@@ -242,7 +247,7 @@
             "stack": "general.mac_address",
             "level": 1,
             "type": "string",
-            "value": "34:36:3B:CC:71:36",
+            "value": " 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36",
             "key": "mac_address",
             "hidden": false
           },
@@ -523,7 +528,7 @@
       "compress": true
     }
   ]
-};
+};*/
 	
 	// tracks changes on <sn-record-picker> records
 	$scope.$on("field.change",function(evt,params){
@@ -902,13 +907,14 @@ textarea {
 }
 
 .paneContainer {
-	padding: 5px;
-  color: white;
+	padding: 0px 5px;
+  color: #444444;
+  font-size: 15px;
 }
 
 .columnReference {
   margin-left: 26px;
-  color: white;
+  //color: white;
 }
 
 .columnReference p {
@@ -920,15 +926,15 @@ textarea {
     border-radius: 3px;
   	background-color: #eaeaea;
   	border-color: #eaeaea;
-		max-height: 93vh;
-  	min-height: 93vh;
+		max-height: 97vh;
+  	min-height: 97vh;
     overflow: auto;
 }
 
 .tableModel {
 	  margin: 5px 0px 10px 0px;
     padding: 6px;
-    background-color: #5a7f71;
+    background-color: #bdc0c4;;
     border-radius: 4px;
 
 }
@@ -938,6 +944,7 @@ textarea {
     border-radius: 4px;
     padding: 0px 0px 0px 7px;
   	margin: -6px -6px 0px;
+  	color: #f5f5f5;
 }
 .are-you-sure p {
 	font-size: 20px
@@ -948,14 +955,16 @@ textarea {
 }
 
 .columnElement {
-    padding-top: 5px;
+    padding-top: 18px;
+    background-color: white;
     border-color: white;
     padding-bottom: 5px;
     border-style: solid;
     border-width: 2px;
     border-radius: 5px;
-    padding: 6px;
+    padding: 10px 8px 10px 8px;
     margin-top: 10px;
+    font-size: 15px;
 }
 
 
@@ -989,8 +998,8 @@ textarea {
     border-radius: 3px;
   	background-color: #eaeaea;
   	border-color: #eaeaea;
-		max-height: 93vh;
-  	min-height: 93vh;
+		max-height: 97vh;
+  	min-height: 97vh;
     overflow: auto;
 }
 
@@ -1015,15 +1024,15 @@ textarea {
 
 
 .elementBox {
-		padding-left: 6px;
-    margin-top: 5px;
-    margin-bottom: 5px;
     border-style: solid;
     border-width: 1px;
-  	border-radius: 3px;
+    border-radius: 3px;
     border-color: #247ba0;
-  	background-color: #247ba0;
-  	color: white;
+    background-color: #247ba0;
+    color: white;
+    padding: 2px 10px;
+    margin: 7px 0px;
+
 }
 
 .parentRep {
@@ -1032,24 +1041,44 @@ textarea {
     margin-bottom: 5px;
     border-style: solid;
     border-width: 1px;
-  	border-radius: 3px;
+    border-radius: 3px;
     border-color: #454b4e;
-  	background-color: #454b4e;
-  	color: white;
+    background-color: #454b4e;
+    color: white;
+    padding: 2px 10px;
 }
 
 .slide {
 	//margin-left: 10px;
   -webkit-transition:max-height ease-out .5s;
   transition:max-height ease-out .5s;
-  max-height: 225px;
+  overflow: hidden;
+  //max-height:0;
+  max-height: 255px;
   //max-height: 100%;
 }
 
+
+/*.collapsing {
+	overflow: hidden;
+  transition: height 0.35s ease;
+  position: relative;
+  height: 0;
+}
+
+.collapse {
+ display: none;
+}
+
+.collapse.in {
+	display: block !important;
+  height: 100%;
+}*/
+
 .slide.elDetail {
 	max-height: 75px;
-  -webkit-transition:max-height ease-out .2s;
-  transition:max-height ease-out .2s;
+  -webkit-transition:max-height ease-in .2s;
+  transition:max-height ease-in .2s;
 }
 
 
@@ -1115,6 +1144,7 @@ button.cancel {
 		font-size: 17px;
     margin-top: 7px;
   	margin-bottom: 0px;
+  	color: #247ba0;
 }
 
 .addNew:hover{
@@ -1144,6 +1174,7 @@ button.cancel {
 
 /* Style the buttons inside the tab */
 .tab {
+  padding: 0px;
 	text-align: center;
 }
 
@@ -1154,7 +1185,7 @@ button.cancel {
   cursor: pointer;
   padding: 14px 16px;
   transition: 0.3s;
-  font-size: 17px;
+  font-size: 16px;
   width: 49%;
 }
 
@@ -1168,6 +1199,9 @@ button.cancel {
 	background-color: #ddd;
 }
 
+.tab .small {
+	    padding: 6px 16px;
+}
 /* Create an active/current tablink class */
 .tab button.active {
   background-color: #ccc;
@@ -1182,11 +1216,45 @@ button.cancel {
 }
 
 #previewModal pre {
-	max-height: 80vh;
+	max-height: 78vh;
 }
 
 #previewModal .modal-header {
 	 padding-bottom: 3px;
+}
+
+.testButton {
+		width: 100%;
+    border-radius: 2px;
+    background-color: #5a7f71;
+    border-color: #80b4a0;
+    color: white;
+}
+
+.testButton:hover{
+	opacity: 90%;
+}
+
+#previewModal pre.halfHeight {
+	max-height: 39vh;
+}
+
+.analyze-new-payload{
+	  text-align: center;
+    margin-top: 42vh;
+}
+
+#search {
+  width: 79%;
+  display: unset;
+}
+
+.btn.ireButton{
+    background-color: #247ba0;
+    color: white;
+}
+.btn.ireButton:hover{
+	opacity: 90%
 }
 </css>
         <data_table>sp_instance</data_table>
@@ -1242,22 +1310,21 @@ button.cancel {
         <sys_created_by>erik.anderson</sys_created_by>
         <sys_created_on>2020-05-14 13:51:19</sys_created_on>
         <sys_id>cc2560d5db30101095ea53184b96198a</sys_id>
-        <sys_mod_count>675</sys_mod_count>
+        <sys_mod_count>785</sys_mod_count>
         <sys_name>Mapping Helper</sys_name>
         <sys_package display_value="IRE Extension" source="x_156954_ire_exten">268ef9a8dbb8101095ea53184b9619c4</sys_package>
         <sys_policy/>
         <sys_scope display_value="IRE Extension">268ef9a8dbb8101095ea53184b9619c4</sys_scope>
         <sys_update_name>sp_widget_cc2560d5db30101095ea53184b96198a</sys_update_name>
         <sys_updated_by>erik.anderson</sys_updated_by>
-        <sys_updated_on>2020-06-16 21:09:32</sys_updated_on>
+        <sys_updated_on>2020-07-08 17:28:58</sys_updated_on>
         <template><![CDATA[<div>
     <!--<label>{{c.ireModel}}</label>-->
-    <div class="col-sm-12">
-        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#priamryModal">Load Payload</button>
-				<button type="button" class="btn btn-success" ng-click="c.previewMap()" ng-disabled="!c.payload || !c.ireModel">
-          Preview Map
-      </button>
-    </div>
+    <!--<div class="col-sm-12">
+        <button type="button" class="btn btn-success" ng-click="c.previewMap()" ng-disabled="!c.payload || !c.ireModel">
+            Preview Map
+        </button>
+    </div>-->
 
     <script>
         //gets the angular scope from outside because 
@@ -1267,178 +1334,23 @@ button.cancel {
         }
     </script>
     <!--<label>{{c.ireModel}}</label>-->
-    <div id="drag-n-drop" class="col-sm-7 paneContainer">
-        <div class="col-sm-12 ireModelPane customScroll">
-            <!--<button type="button" class="btn btn-info" ng-click="c.addNewTable()">New Table</button>-->
-          <div class="outer-add">
-            <label style="color: #247ba0;" class="addNew" ng-click="c.addNewTable()"><i class="fa fa-plus"
-                    aria-hidden="true"></i> Add New Table</label>
-          </div>
-            
-            <div class="col-sm">
-
-
-                <div ng-init="parentIndex = $index" class="tableModel" ng-repeat="table in c.ireModel.items" >
-                    <div class="col-sm table-header">
-
-                        <div class="are-you-sure slide" ng-hide="!table.confirmDelete">
-                            <p>Are you sure you want to remove this table from the model? All child elements will be
-                                removed as well.</p>
-                            <div class="confirm-buttons">
-                                <button type="button" class="btn confirm"
-                                    ng-click="c.deleteTable(c.ireModel.items, $index)">
-                                    Yes
-                                </button>
-                                <button type="button" class="btn cancel" ng-click="table.confirmDelete = false">
-                                    Cancel
-                                </button>
-                            </div>
-                        </div>
-                        <label ng-click="table.compress = !table.compress"><i
-                                ng-class="{'fa fa-caret-right' : table.compress , 'fa fa-caret-down' : !table.compress}"></i>
-                            Target Table</label>
-                        <i class="fa fa-times close-x" ng-click="table.confirmDelete = true"
-                            ng-if="!table.confirmDelete"></i>
-                    </div>
-
-                    <sn-record-picker field="table.className" table="'sys_db_object'" display-field="'label'"
-                        display-fields="'name'" value-field="'name'" search-fields="'label,name'" page-size="100">
-                    </sn-record-picker>
-                    <!--<button type="button" class="btn btn-info" ng-click="c.addNewColumn(table)">New Column</button>-->
-
-
-
-
-
-
-                    <div class="valueArray" ng-hide="table.compress">
-                      <div class="outer-add">
-                        <i ng-class="{'fa fa-caret-right column-compress-carrot' : c.allColumnsCompressed(table) , 'fa fa-caret-down column-compress-carrot' : !c.allColumnsCompressed(table)}"
-                            ng-click="c.compressOrExpandAllColumns(table, !c.allColumnsCompressed(table))"></i>
-                         <label class="addNew" ng-click="c.addNewColumn(table)"><i class="fa fa-plus"
-                                aria-hidden="true"></i> Add New Column</label>
-                      </div>
-                       
-                        <div id="{{parentIndex + '.new'}}" ng-if="c.draggingSourceElement"
-                            ondragleave="getScope().dragLeave(this, event)" ondragenter="getScope().dragEnter(this)"
-                            ondragover="getScope().dragOver(event)" class="addNewColumn"
-                            ondrop="angular.element(this).scope().c.drop(event, this)"
-                            ondragover="angular.element(this).scope().c.allowDrop(event)">
-                            <h4>
-                                Add New Column
-                            </h4>
-                        </div>
-                        
-
-                        <div id="{{parentIndex + '.' +$index}}" ondragleave="getScope().dragLeave(this, event)"
-                            ondragenter="getScope().dragEnter(this)" ondragover="getScope().dragOver(event)"
-                            class="columnElement" ondrop="angular.element(this).scope().c.drop(event, this)"
-                            ondragover="angular.element(this).scope().c.allowDrop(event)"
-                            ng-repeat="column in table.values">
-
-                            <div class="col-sm" ng-click="column.compress = !column.compress">
-
-                                <div ng-hide="column.compress">
-                                    <i
-                                        ng-class="{'fa fa-caret-right' : column.compress , 'fa fa-caret-down' : !column.compress}"></i>
-                                    <label>Source Location</label>
-                                    <i class="fa fa-times close-x" ng-click="c.deleteColumn(table.values, $index)"></i>
-                                </div>
-                                <div ng-hide="!column.compress">
-                                    <i
-                                        ng-class="{'fa fa-caret-right' : column.compress , 'fa fa-caret-down' : !column.compress}"></i>
-                                    <label>{{column.objectKey.stack || 'Undefined'}} <i class="fa fa-long-arrow-right"
-                                            aria-hidden="true"></i>
-                                        {{column.column.displayValue || 'Undefined'}}</label>
-                                    <!--<label>Source: {{column.objectKey.stack}}</label>
-                <label>Target: {{column.column.displayValue}}</label>-->
-                                    <i class="fa fa-times close-x" ng-click="c.deleteColumn(table.values, $index)"></i>
-                                </div>
-
-                            </div>
-
-                            <div class="slide" ng-hide="column.compress">
-                                <div class="elementBox" ng-hide="!column.objectKey.stack">
-                                    <div class="col-sm">
-                                        <i ng-class="{'fa fa-caret-right' : !column.objectKey.showDetails , 'fa fa-caret-down' : column.objectKey.showDetails}"
-                                            ng-click="column.objectKey.showDetails = !column.objectKey.showDetails"></i>
-                                        <label>{{column.objectKey.stack}}</label>
-                                        <!--<i class="fa fa-times close-x" ng-click="column.objectKey = {}"></i>-->
-                                        <label class="clear" ng-click="column.objectKey = {}">clear</label>
-                                    </div>
-                                    <div class="col-sm elementDetail slide elDetail" ng-hide="!column.objectKey.showDetails">
-                                        <label><strong>Key Name:</strong> {{column.objectKey.key}}</label>
-                                        <label><strong>Value:</strong> {{column.objectKey.value}}</label>
-                                        <label><strong>Type:</strong> {{column.objectKey.type}}</label>
-                                    </div>
-                                </div>
-
-                                <div class="dropBox" ng-hide="column.objectKey.stack">
-                                    <label>Drop A Source Element Here</label>
-                                </div>
-
-                                <label>Target Column</label>
-                                <sn-record-picker field="column.column" table="'sys_dictionary'"
-                                    display-field="'column_label'" display-fields="'element'" value-field="'element'"
-                                    search-fields="'column_label,element'" page-size="100"
-                                    default-query="'name='+table.className.value"></sn-record-picker>
-                                <div class="columnReference" ng-if="column.column.referenceTable">
-                                    <p>The target column is a reference field on table
-                                        <strong>{{column.column.referenceTable}}</strong>. Select a reference qualifier
-                                        field</p>
-                                    <sn-record-picker field="column.column.referenceField" table="'sys_dictionary'"
-                                        display-field="'column_label'" display-fields="'element'"
-                                        value-field="'element'" search-fields="'column_label,element'" page-size="100"
-                                        default-query="'name='+column.column.referenceTable"></sn-record-picker>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-              <div class="outer-add">
-                <label style="color: #247ba0;" class="addNew" ng-click="c.addNewRelationship()"><i class="fa fa-plus"></i> Add New Relationship</label>
-              </div>
-                <div class="tableModel" ng-repeat="relationship in c.ireModel.relations">
-                   <i ng-class="{'fa fa-caret-right' : relationship.compress , 'fa fa-caret-down' : !relationship.compress}" ng-click="relationship.compress = !relationship.compress"></i>
-                  	<i class="fa fa-times close-x" ng-click="c.deleteRelationship(c.ireModel.relations, $index)"></i>
-                  	<label>Parent Table</label>
-                    <sn-record-picker field="relationship.parent" table="'sys_db_object'" display-field="'label'"
-                        display-fields="'name'" value-field="'name'" search-fields="'label,name'" default-query="c.buildRelationshipQuery()" page-size="100">
-                    </sn-record-picker>
-                  	
-                      <label>Child Table</label>
-                    <sn-record-picker field="relationship.child" table="'sys_db_object'" display-field="'label'"
-                                      display-fields="'name'" value-field="'name'" search-fields="'label,name'" default-query="c.buildRelationshipQuery()" page-size="100">
-                    </sn-record-picker>
-                  <div class="slide" ng-hide="relationship.compress">
-                  <div style="margin-left:26px;" ng-if="relationship.child.value">
-                    <label>Child Reference Field</label>
-                  	<sn-record-picker field="relationship.child.referenceField" table="'sys_dictionary'" 
-                                        display-field="'column_label'" display-fields="'element'"
-                                        value-field="'element'" search-fields="'column_label,element'" page-size="100"
-                                        default-query="'internal_type=reference^name='+relationship.child.value"></sn-record-picker>
-                  </div>
-                  
-                  	<label>Relationship Type</label>
-                    <sn-record-picker field="relationship.type" table="'cmdb_rel_type'" display-field="'label'"
-                                      value-field="'name'" search-fields="'name'" page-size="100">
-                    </sn-record-picker>
-                  </div>
-                    
-                  
-                  	
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-
     <div class="col-sm-5 paneContainer">
+      
+      
+      
         <div class="col-sm-12 payloadArrayPane customScroll">
+          <div class="col-sm-12 analyze-new-payload" ng-if="!c.keyArray">
+        		<h4>
+              Insert a sample payload to start so you can begin creating a new IRE map.
+            </h4>
+            <button type="button" class="btn ireButton" data-toggle="modal" data-target="#priamryModal">Load Payload</button>
+ 
+      		</div>
+          <div  ng-if="c.keyArray && c.keyArray.length > 1">
             <input type="input" class="form-control" ng-model="c.searchFilter" id="search" placeholder="Search">
+             <button type="button" class="btn ireButton" data-toggle="modal" data-target="#priamryModal" style="width: 20%">
+              New Payload
+            </button>
 
             <div class="col-sm">
                 <div ng-hide="element.hidden" id="{{$index}}" ng-attr-draggable="{{!element.parentRep}}"
@@ -1467,8 +1379,211 @@ button.cancel {
                 </div>
 
             </div>
+          </div>
+            
         </div>
     </div>
+
+    <div id="drag-n-drop" class="col-sm-7 paneContainer">
+      	
+      
+        <div class="col-sm-12 ireModelPane customScroll">
+            <!--<button type="button" class="btn btn-info" ng-click="c.addNewTable()">New Table</button>-->
+          <div class="col-sm-12" style="padding:0px;">
+             <div class="tab col-sm-10">
+                    <button
+                        ng-class="{'tablinks selected small' : c.modalPaneType ==='Tables' , 'tablinks small': c.modalPaneType !== 'Tables'}"
+                        ng-click="c.modalPaneType ='Tables'">Tables</button>
+                    <button
+                        ng-class="{'tablinks selected small' : c.modalPaneType ==='Relationships' , 'tablinks small': c.modalPaneType !== 'Relationships'}"
+                        ng-click="c.modalPaneType ='Relationships'">Relationships</button>
+                </div>
+           <button type="button" class="btn ireButton col-sm-2" ng-click="c.previewMap()" ng-disabled="!c.payload || !c.ireModel" style="width:%9">
+            Preview Map
+        </button>
+          </div>
+           
+            
+
+            <div class="col-sm">
+                <div class="tableOptions" ng-if="c.modalPaneType === 'Tables'">
+                    <div class="outer-add">
+                        <label style="color: #247ba0;" class="addNew" ng-click="c.addNewTable()"><i class="fa fa-plus"
+                                aria-hidden="true"></i> Add New Table</label>
+                    </div>
+                    <div ng-init="parentIndex = $index" class="tableModel" ng-repeat="table in c.ireModel.items">
+                        <div class="col-sm table-header">
+    
+                            <div class="are-you-sure slide" ng-hide="!table.confirmDelete">
+                                <p>Are you sure you want to remove this table from the model? All child elements will be
+                                    removed as well.</p>
+                                <div class="confirm-buttons">
+                                    <button type="button" class="btn confirm"
+                                        ng-click="c.deleteTable(c.ireModel.items, $index)">
+                                        Yes
+                                    </button>
+                                    <button type="button" class="btn cancel" ng-click="table.confirmDelete = false">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                            <label ng-click="table.compress = !table.compress"><i
+                                    ng-class="{'fa fa-caret-right' : table.compress , 'fa fa-caret-down' : !table.compress}"></i>
+                                Target Table</label>
+                            <i class="fa fa-times close-x" ng-click="table.confirmDelete = true"
+                                ng-if="!table.confirmDelete"></i>
+                        </div>
+    
+                        <sn-record-picker field="table.className" table="'sys_db_object'" display-field="'label'"
+                            display-fields="'name'" value-field="'name'" search-fields="'label,name'" page-size="100">
+                        </sn-record-picker>
+                        <!--<button type="button" class="btn btn-info" ng-click="c.addNewColumn(table)">New Column</button>-->
+    
+    
+    
+    
+    
+    
+                        <div class="valueArray" ng-hide="table.compress">
+                            <div class="outer-add">
+                                <i ng-class="{'fa fa-caret-right column-compress-carrot' : c.allColumnsCompressed(table) , 'fa fa-caret-down column-compress-carrot' : !c.allColumnsCompressed(table)}"
+                                    ng-click="c.compressOrExpandAllColumns(table, !c.allColumnsCompressed(table))"></i>
+                                <label class="addNew" ng-click="c.addNewColumn(table)" style="    margin-right: 24px;"><i class="fa fa-plus"
+                                        aria-hidden="true"></i> Add New Column</label>
+                            </div>
+    
+                            <div id="{{parentIndex + '.new'}}" ng-if="c.draggingSourceElement"
+                                ondragleave="getScope().dragLeave(this, event)" ondragenter="getScope().dragEnter(this)"
+                                ondragover="getScope().dragOver(event)" class="addNewColumn"
+                                ondrop="angular.element(this).scope().c.drop(event, this)"
+                                ondragover="angular.element(this).scope().c.allowDrop(event)">
+                                <h4>
+                                    Add New Column
+                                </h4>
+                            </div>
+    
+    
+                            <div id="{{parentIndex + '.' +$index}}" ondragleave="getScope().dragLeave(this, event)"
+                                ondragenter="getScope().dragEnter(this)" ondragover="getScope().dragOver(event)"
+                                class="columnElement" ondrop="angular.element(this).scope().c.drop(event, this)"
+                                ondragover="angular.element(this).scope().c.allowDrop(event)"
+                                ng-repeat="column in table.values">
+    
+                                <div class="col-sm" ng-click="column.compress = !column.compress">
+    
+                                    <div ng-hide="column.compress">
+                                        <i 
+                                            ng-class="{'fa fa-caret-right' : column.compress , 'fa fa-caret-down' : !column.compress}"></i>
+                                        <label style="cursor: pointer">Source Location</label>
+                                        <i class="fa fa-times close-x" ng-click="c.deleteColumn(table.values, $index)"></i>
+                                    </div>
+                                    <div ng-hide="!column.compress">
+                                        <i 
+                                            ng-class="{'fa fa-caret-right' : column.compress , 'fa fa-caret-down' : !column.compress}"></i>
+                                        <label style="cursor: pointer">{{column.objectKey.stack || 'Undefined'}} <i class="fa fa-long-arrow-right"
+                                                aria-hidden="true"></i>
+                                            {{column.column.displayValue || 'Undefined'}}</label>
+                                        <!--<label>Source: {{column.objectKey.stack}}</label>
+                    <label>Target: {{column.column.displayValue}}</label>-->
+                                        <i class="fa fa-times close-x" ng-click="c.deleteColumn(table.values, $index)"></i>
+                                    </div>
+    
+                                </div>
+    
+                                <div class="slide" ng-hide="column.compress">
+                                    <div class="elementBox"
+                                        ng-click="column.objectKey.showDetails = !column.objectKey.showDetails"
+                                        ng-hide="!column.objectKey.stack">
+                                        <div class="col-sm">
+                                            <i
+                                                ng-class="{'fa fa-caret-right' : !column.objectKey.showDetails , 'fa fa-caret-down' : column.objectKey.showDetails}"></i>
+                                            <label>{{column.objectKey.stack}}</label>
+                                            <!--<i class="fa fa-times close-x" ng-click="column.objectKey = {}"></i>-->
+                                            <label class="clear" ng-click="column.objectKey = {}">clear</label>
+                                        </div>
+                                        <div class="col-sm elementDetail slide elDetail"
+                                            ng-hide="!column.objectKey.showDetails">
+                                            <label><strong>Key Name:</strong> {{column.objectKey.key}}</label>
+                                            <label><strong>Value:</strong> {{column.objectKey.value}}</label>
+                                            <label><strong>Type:</strong> {{column.objectKey.type}}</label>
+                                        </div>
+                                    </div>
+    
+                                    <div class="dropBox" ng-hide="column.objectKey.stack">
+                                        <label>Drop A Source Element Here</label>
+                                    </div>
+    
+                                    <label>Target Column</label>
+                                    <sn-record-picker field="column.column" table="'sys_dictionary'"
+                                        display-field="'column_label'" display-fields="'element'" value-field="'element'"
+                                        search-fields="'column_label,element'" page-size="100"
+                                        default-query="'name='+table.className.value"></sn-record-picker>
+                                    <div class="columnReference" ng-if="column.column.referenceTable">
+                                        <p>The target column is a reference field on table
+                                            <strong>{{column.column.referenceTable}}</strong>. Select a reference qualifier
+                                            field</p>
+                                        <sn-record-picker field="column.column.referenceField" table="'sys_dictionary'"
+                                            display-field="'column_label'" display-fields="'element'"
+                                            value-field="'element'" search-fields="'column_label,element'" page-size="100"
+                                            default-query="'name='+column.column.referenceTable"></sn-record-picker>
+                                    </div>
+                                </div>
+                            </div>
+    
+    
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relationshipOptions" ng-if="c.modalPaneType === 'Relationships'" > 
+                    <div class="outer-add">
+                        <label style="color: #247ba0;" class="addNew" ng-click="c.addNewRelationship()"><i
+                                class="fa fa-plus"></i> Add New Relationship</label>
+                    </div>
+                    <div class="tableModel" ng-repeat="relationship in c.ireModel.relations">
+                        <i ng-class="{'fa fa-caret-right' : relationship.compress , 'fa fa-caret-down' : !relationship.compress}"
+                            ng-click="relationship.compress = !relationship.compress"></i>
+                        <i class="fa fa-times close-x"
+                            ng-click="c.deleteRelationship(c.ireModel.relations, $index)"></i>
+                        <label>Parent Table</label>
+                        <sn-record-picker field="relationship.parent" table="'sys_db_object'" display-field="'label'"
+                            display-fields="'name'" value-field="'name'" search-fields="'label,name'"
+                            default-query="c.buildRelationshipQuery()" page-size="100">
+                        </sn-record-picker>
+
+                        <label>Child Table</label>
+                        <sn-record-picker field="relationship.child" table="'sys_db_object'" display-field="'label'"
+                            display-fields="'name'" value-field="'name'" search-fields="'label,name'"
+                            default-query="c.buildRelationshipQuery()" page-size="100">
+                        </sn-record-picker>
+                        <div class="slide" ng-hide="relationship.compress">
+                            <div style="margin-left:26px;" ng-if="relationship.child.value">
+                                <label>Child Reference Field</label>
+                                <sn-record-picker field="relationship.child.referenceField" table="'sys_dictionary'"
+                                    display-field="'column_label'" display-fields="'element'" value-field="'element'"
+                                    search-fields="'column_label,element'" page-size="100"
+                                    default-query="'internal_type=reference^name='+relationship.child.value">
+                                </sn-record-picker>
+                            </div>
+
+                            <label>Relationship Type</label>
+                            <sn-record-picker field="relationship.type" table="'cmdb_rel_type'" display-field="'label'"
+                                value-field="'name'" search-fields="'name'" page-size="100">
+                            </sn-record-picker>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 
 </div>
 
@@ -1497,35 +1612,44 @@ button.cancel {
 
 </div>
 
-<div class="modal fade"  id="previewModal" >
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <div class="tab">
-          <button  ng-class="{'tablinks selected' : c.previewTab ==='Preview' , 'tablinks': c.previewTab !== 'Preview'}" ng-click="c.previewTab ='Preview'">Map Preview</button>
-          <button ng-class="{'tablinks selected' : c.previewTab ==='Input' , 'tablinks': c.previewTab !== 'Input'}" ng-click="c.previewTab ='Input'">Sample IRE Input</button>
-      	</div>
-        
-      </div>
-       <div class="modal-body">
-         <div ng-if="c.previewTab === 'Preview'">
-           <pre class="customScroll">{{c.simplifiedModel | json}}</pre>
-         </div>
-         
-         <div ng-if="c.previewTab === 'Input'">
-           <pre class="customScroll">{{c.previewInput | json}}</pre>
-           
-           <pre ng-if="c.previewOutput" class="customScroll">{{c.previewOutput | json}}</pre>
-           
-           <button class="btn btn-primary" ng-click="c.testIandR()">
-             Test Identify and Reconcile
-           </button>
-         </div>
-         
-      </div>
+<div class="modal fade" id="previewModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="tab">
+                    <button
+                        ng-class="{'tablinks selected' : c.previewTab ==='Preview' , 'tablinks': c.previewTab !== 'Preview'}"
+                        ng-click="c.previewTab ='Preview'">Map Preview</button>
+                    <button
+                        ng-class="{'tablinks selected' : c.previewTab ==='Input' , 'tablinks': c.previewTab !== 'Input'}"
+                        ng-click="c.previewTab ='Input'">Sample IRE Input</button>
+                </div>
+
+            </div>
+            <div class="modal-body">
+                <div ng-if="c.previewTab === 'Preview'">
+                    <pre class="customScroll">{{c.simplifiedModel | json}}</pre>
+                </div>
+
+                <div ng-if="c.previewTab === 'Input'">
+                    <pre
+                        ng-class="{'halfHeight customScroll' : c.previewOutput, 'customScroll': !c.previewOutput}">{{c.previewInput | json}}</pre>
+
+                    <div ng-if="c.previewOutput">
+                        <label>IRE Output</label>
+                        <pre class="customScroll" style="max-height: 39vh">{{c.previewOutput | json}}</pre>
+                    </div>
+
+
+                    <button ng-if="!c.previewOutput" class="btn testButton" ng-click="c.testIandR()">
+                        Test Identify and Reconcile
+                    </button>
+                </div>
+
+            </div>
+        </div>
     </div>
-  </div>
 </div>]]></template>
     </sp_widget>
 </record_update>
