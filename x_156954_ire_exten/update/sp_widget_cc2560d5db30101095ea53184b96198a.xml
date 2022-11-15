@@ -1,0 +1,1655 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope) {
+  /* widget controller */
+  var c = this;
+	c.analyzePayload = analyzePayload;
+	c.addNewTable = addNewTable;
+	c.addNewColumn = addNewColumn;
+	c.addNewRelationship = addNewRelationship;
+	c.drop = drop;
+	c.allowDrop = allowDrop;
+	c.drag = drag;
+	c.dragLeave = dragLeave;
+	c.dragEnter = dragEnter;
+	c.dragEnd = dragEnd;
+	c.deleteColumn = deleteColumn;
+	c.deleteTable = deleteTable;
+	c.deleteRelationship = deleteRelationship
+	c.allColumnsCompressed  = allColumnsCompressed
+	c.compressOrExpandAllColumns = compressOrExpandAllColumns;
+	c.buildRelationshipQuery = buildRelationshipQuery;
+	c.previewMap = previewMap;
+	c.testIandR = testIandR;
+	
+	
+	c.showHideChildElements = showHideChildElements;
+	c.modalPaneType ='Tables';
+	c.ireModel = {
+		items: [],
+		relationships: []
+	}
+	
+/*	c.ireModel = {
+  "items": [
+    {
+      "className": {
+        "value": "cmdb_ci_computer",
+        "displayValue": "Computer",
+        "table": "cmdb_ci_computer"
+      },
+      "values": [
+        {
+          "column": {
+            "value": "model_number",
+            "displayValue": "Model number",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_computer",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "hardware.model_identifier",
+            "level": 1,
+            "type": "string",
+            "value": "MacBookPro11,3",
+            "key": "model_identifier",
+            "hidden": false
+          },
+          "compress": true
+        },
+        {
+          "column": {
+            "value": "model_id",
+            "displayValue": "Model ID",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_computer",
+            "referenceField": {
+              "value": "name",
+              "displayValue": "Name"
+            },
+            "referenceTable": "cmdb_model"
+          },
+          "objectKey": {
+            "stack": "hardware.model",
+            "level": 1,
+            "type": "string",
+            "value": "15-inch Retina MacBook Pro (Late 2013)",
+            "key": "model",
+            "hidden": false
+          },
+          "compress": true
+        },
+        {
+          "column": {
+            "value": "cpu_core_count",
+            "displayValue": "CPU core count",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_computer",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "hardware.number_cores",
+            "level": 1,
+            "type": "number",
+            "value": 4,
+            "key": "number_cores",
+            "hidden": false
+          },
+          "compress": true
+        },
+        {
+          "column": {
+            "value": "ram",
+            "displayValue": "RAM (MB)",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_computer",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "hardware.total_ram_mb",
+            "level": 1,
+            "type": "number",
+            "value": 16384,
+            "key": "total_ram_mb",
+            "hidden": false
+          },
+          "compress": true
+        },
+        {
+          "column": {
+            "value": "cpu_count",
+            "displayValue": "CPU count",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_computer",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "hardware.number_processors",
+            "level": 1,
+            "type": "number",
+            "value": 1,
+            "key": "number_processors",
+            "hidden": false
+          },
+          "compress": true
+        },
+        {
+          "column": {
+            "value": "os_version",
+            "displayValue": "OS Version",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_computer",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "hardware.os_version",
+            "level": 1,
+            "type": "string",
+            "value": "10.15.4",
+            "key": "os_version",
+            "hidden": false,
+            "showDetails": true
+          },
+          "compress": true
+        },
+        {
+          "column": {
+            "value": "os",
+            "displayValue": "Operating System",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_computer",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "hardware.os_name",
+            "level": 1,
+            "type": "string",
+            "value": "Mac OS X",
+            "key": "os_name",
+            "hidden": false,
+            "showDetails": true
+          },
+          "compress": true
+        },
+        {
+          "column": {
+            "value": "serial_number",
+            "displayValue": "Serial number",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_computer",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "general.serial_number",
+            "level": 1,
+            "type": "string",
+            "value": "C02P720XG3QP",
+            "key": "serial_number",
+            "hidden": false
+          },
+          "compress": true
+        },
+        {
+          "column": {
+            "value": "asset_tag",
+            "displayValue": "Asset tag",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_computer",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "general.asset_tag",
+            "level": 1,
+            "type": "string",
+            "value": "ITSASSET23456",
+            "key": "asset_tag",
+            "hidden": false
+          },
+          "compress": true
+        },
+        {
+          "column": {
+            "value": "mac_address",
+            "displayValue": "MAC Address",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_computer",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "general.mac_address",
+            "level": 1,
+            "type": "string",
+            "value": " 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36 34:36:3B:CC:71:36",
+            "key": "mac_address",
+            "hidden": false
+          },
+          "compress": true
+        },
+        {
+          "column": {
+            "value": "name",
+            "displayValue": "Name",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_computer",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "general.name",
+            "level": 1,
+            "type": "string",
+            "value": "Test1’s MacBook Pro",
+            "key": "name"
+          },
+          "compress": true
+        },
+        {
+          "column": {
+            "value": "ip_address",
+            "displayValue": "IP Address",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_computer",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "general.ip_address",
+            "level": 0,
+            "type": "string",
+            "value": "47.225.174.98",
+            "key": "ip_address"
+          },
+          "compress": true
+        },
+        {
+          "column": {
+            "value": "assigned_to",
+            "displayValue": "Assigned to",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_computer",
+            "referenceField": {
+              "value": "user_name",
+              "displayValue": "User ID"
+            },
+            "referenceTable": "sys_user"
+          },
+          "objectKey": {
+            "stack": "location.username",
+            "level": 1,
+            "type": "string",
+            "value": "erik.anderson",
+            "key": "username",
+            "hidden": false,
+            "showDetails": false
+          },
+          "compress": true
+        }
+      ],
+      "compress": false
+    },
+    {
+      "className": {
+        "value": "cmdb_ci_disk",
+        "displayValue": "Disk",
+        "table": "cmdb_ci_computer"
+      },
+      "values": [
+        {
+          "column": {
+            "value": "size",
+            "displayValue": "Size",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_disk",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "hardware.storage.size",
+            "level": 2,
+            "type": "number",
+            "value": 1048576,
+            "key": "size",
+            "hidden": false
+          },
+          "compress": true
+        },
+        {
+          "column": {
+            "value": "serial_number",
+            "displayValue": "Serial number",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_disk",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "hardware.storage.serial_number",
+            "level": 2,
+            "type": "string",
+            "value": "S1K6NYAFC36492",
+            "key": "serial_number",
+            "hidden": false
+          },
+          "compress": true
+        },
+        {
+          "column": {
+            "value": "model_id",
+            "displayValue": "Model ID",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_disk",
+            "referenceField": {
+              "value": "name",
+              "displayValue": "Name"
+            },
+            "referenceTable": "cmdb_model"
+          },
+          "objectKey": {
+            "stack": "hardware.storage.model",
+            "level": 2,
+            "type": "string",
+            "value": "APPLE SSD SM1024F",
+            "key": "model",
+            "hidden": false
+          },
+          "compress": true
+        },
+        {
+          "column": {
+            "value": "name",
+            "displayValue": "Name",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_disk",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "hardware.storage.disk",
+            "level": 2,
+            "type": "string",
+            "value": "disk0",
+            "key": "disk",
+            "hidden": false
+          },
+          "compress": true
+        }
+      ],
+      "compress": true
+    },
+    {
+      "className": {
+        "value": "cmdb_ci_disk_partition",
+        "displayValue": "Disk Partition",
+        "table": "cmdb_ci_computer"
+      },
+      "values": [
+        {
+          "column": {
+            "value": "size",
+            "displayValue": "Size",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_disk_partition",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "hardware.storage.partitions.size",
+            "level": 3,
+            "type": "number",
+            "value": 954004,
+            "key": "size",
+            "hidden": false
+          }
+        },
+        {
+          "column": {
+            "value": "name",
+            "displayValue": "Name",
+            "table": "sys_dictionary",
+            "parentTable": "cmdb_ci_disk_partition",
+            "referenceField": {
+              "value": "",
+              "displayValue": ""
+            }
+          },
+          "objectKey": {
+            "stack": "hardware.storage.partitions.name",
+            "level": 3,
+            "type": "string",
+            "value": "Data",
+            "key": "name",
+            "hidden": false
+          }
+        }
+      ],
+      "compress": true
+    }
+  ],
+  "relations": [
+    {
+      "parent": {
+        "displayValue": "Disk",
+        "value": "cmdb_ci_disk"
+      },
+      "child": {
+        "displayValue": "Disk Partition",
+        "value": "cmdb_ci_disk_partition",
+        "type": "child",
+        "referenceField": {
+          "displayValue": "Disk",
+          "value": "disk"
+        }
+      },
+      "type": {
+        "displayValue": "Contains::Contained by",
+        "value": "Contains::Contained by"
+      },
+      "compress": true
+    },
+    {
+      "parent": {
+        "displayValue": "Computer",
+        "value": "cmdb_ci_computer"
+      },
+      "child": {
+        "displayValue": "Disk Partition",
+        "value": "cmdb_ci_disk_partition",
+        "type": "child",
+        "referenceField": {
+          "displayValue": "Computer",
+          "value": "computer"
+        }
+      },
+      "type": {
+        "displayValue": "Contains::Contained by",
+        "value": "Contains::Contained by"
+      },
+      "compress": true
+    },
+    {
+      "parent": {
+        "displayValue": "Computer",
+        "value": "cmdb_ci_computer"
+      },
+      "child": {
+        "displayValue": "Disk",
+        "value": "cmdb_ci_disk",
+        "type": "child",
+        "referenceField": {
+          "displayValue": "Computer",
+          "value": "computer",
+          "referenceTable": ""
+        }
+      },
+      "type": {
+        "displayValue": "Contains::Contained by",
+        "value": "Contains::Contained by"
+      },
+      "compress": true
+    }
+  ]
+};*/
+	
+	// tracks changes on <sn-record-picker> records
+	$scope.$on("field.change",function(evt,params){
+		var field = params.field;
+		if(field.table === 'sys_dictionary'){
+			if(field.referenceTable){
+				field.referenceTable = ''
+				field.referenceField = {
+					displayValue: '',
+					value: ''
+				}
+			}
+			field.referenceTable = getReferenceTable(field);
+		}
+		if(field.type === 'child'){
+			if(field.referenceField){
+				field.referenceField = {
+					displayValue: '',
+					value: ''
+				}
+			}
+		}
+		//console.log(field)
+	})
+	
+	function showHideChildElements(element){
+		element.showDetails = !element.showDetails;
+		var stack  = element.stack;
+		
+		for(var i = 0; i < c.keyArray.length; i++){
+			var key = c.keyArray[i];
+			if(key.stack.indexOf(stack) === 0 && key.stack !== stack){
+				c.keyArray[i].hidden = !element.showDetails;
+			}
+		}
+		
+	}
+	
+	
+	//executed if a column is a reference field and returns the reference table name
+	function getReferenceTable(field){
+		var input = {
+			action: 'getReferenceTable',
+			table: field.parentTable,
+			element: field.value
+		};
+		c.server.get(input).then(function(response){
+				if(response && response.data){
+					//console.log(response.data.referenceTable);
+					field.referenceTable = response.data.referenceTable;
+					//console.log(field);
+				}
+			})
+	}
+	
+	//unused init function so far
+	/*init();
+	function init(){
+		var input = {
+				action: 'init'
+			}
+			c.server
+				.get(input)
+				.then(function(response){
+				if(response && response.data){
+
+				}
+			})
+	}*/
+	
+	function analyzePayload(payload){
+		var input = {
+				action: 'analyzePayload',
+				payload: payload
+			}
+			c.server
+				.get(input)
+				.then(function(response){
+				if(response && response.data){
+					//console.log(response.data.array);
+						c.keyArray = response.data.array;
+						$('#priamryModal').modal('hide');
+				}
+			})
+	}
+	
+	function previewMap(){
+		c.previewOutput = '';
+		c.previewInput = '';
+		c.simplifiedModel = '';
+		var input = {
+			action: 'previewMap',
+			map:  c.ireModel,
+			payload: c.payload
+		};
+		c.server
+			.get(input)
+			.then(function(response){
+			if(response && response.data && response.data.previewInput && response.data.simplifiedModel){
+				c.simplifiedModel = response.data.simplifiedModel
+				c.previewInput = response.data.previewInput;	
+				c.previewTab = 'Preview';
+				$('#previewModal').modal("show");
+			}
+		});
+	}
+	
+	function testIandR(){
+		var input = {
+			action: 'testIandR',
+			sampleInput: c.previewInput
+		}
+		c.server
+			.get(input)
+			.then(function(response){
+			if(response && response.data && response.data.previewOutput){
+				c.previewOutput = response.data.previewOutput;
+			}
+		});
+	}
+	
+	function addNewTable(){
+		c.ireModel.items.push({
+			className: {
+				value: '',
+				displayValue: '',
+				table: 'cmdb_ci_computer'
+			},
+			values: []
+		})
+	}
+	
+	
+	
+	function deleteTable(tableArray, index){
+		tableArray.splice(index, 1);
+	}
+	
+	function addNewColumn(table, overrideObjectKey){
+		var obj = {
+			column:{
+				value: '',
+				displayValue: '',
+				table: 'sys_dictionary',
+				parentTable: table.className.value,
+				referenceField: {
+					value: '',
+					displayValue: ''
+				}
+			},
+			objectKey: ''
+		};
+		if(overrideObjectKey){
+			obj.objectKey = overrideObjectKey;
+		}
+		table.values.unshift(obj);
+	}
+	
+	function deleteColumn(columnArray, index){
+		columnArray.splice(index, 1);
+	}
+	
+	function addNewRelationship(){
+		var obj = {
+			"parent": {
+                "displayValue": "",
+                "value": ""
+            },
+            "child": {
+                "displayValue": "",
+                "value": "",
+								"type": "child",
+								"referenceField": {
+									"displayValue": "",
+									"value": ""
+							}
+            },
+            "type": {
+                "displayValue": "",
+                "value": ""
+            }
+			}
+		c.ireModel.relations.unshift(obj);
+	}
+	
+	function deleteRelationship(relationshipArray, index){
+		relationshipArray.splice(index,1);
+	}
+	
+	function addPayloadKeyToIREModel(sourceIndex, targetIndex){
+		//splits the column id index[0] is the table array index index[1] is the column index within the table element
+		var targetIndexArray = targetIndex.split('.');
+		if(targetIndexArray.length > 1){
+			if(targetIndexArray[1] === 'new'){
+				addNewColumn(c.ireModel.items[targetIndexArray[0]], copyObj(c.keyArray[sourceIndex]));
+			}else{
+				c.ireModel.items[targetIndexArray[0]].values[targetIndexArray[1]].objectKey = copyObj(c.keyArray[sourceIndex]);	
+			}
+			
+		}
+	}
+	
+	function copyObj(obj){
+		var newObj = {};
+		for(var key in obj){
+			newObj[key] = obj[key];
+		}
+		return newObj;
+	}
+	
+	// start drag and drop functions 
+	function drop(event, element){
+		if (event.stopPropagation) {
+			event.stopPropagation(); // stops the browser from redirecting.
+		}
+		var targetIndex = element.id;
+		var sourceIndex = c.dragId;
+		addPayloadKeyToIREModel(sourceIndex, targetIndex);
+		if (element && element.classList) {
+			element.classList.remove('over');
+		}
+		
+		$scope.$apply();
+		
+	}
+	
+	function allowDrop(ev){
+		if (event.preventDefault) {
+			event.preventDefault(); // Necessary. Allows us to drop.
+		}
+		event.dataTransfer.dropEffect = 'move';
+		return false;
+	}
+	
+	function drag(event) {
+		//change target appearance so we can see we have grabbed it
+		event.target.style.opacity = '0.7';
+		//change cursor
+		event.target.style.cursor = 'grabbing';
+		//prep for move
+		event.dataTransfer.effectAllowed = 'move';
+		event.dataTransfer.setData('text/html', event.target.innerHTML);
+		c.dragId = event.target.id;
+		c.draggingSourceElement = true;
+		$scope.$apply();
+	}
+	
+	function dragOver(event, element) {
+		if (event.preventDefault) {
+				event.preventDefault(); // Necessary. Allows us to drop.
+			}
+			event.dataTransfer.dropEffect = 'move';
+			return false;
+		}
+	
+	 function dragEnter(element) {
+        //set class for things being dragged over
+		 //console.log(element);
+        if (element && element.classList) {
+            element.classList.add('over');
+        }
+				c.currentDragId = element.id;
+    }
+	
+		function dragLeave(element, event) {
+			if(element == event.target){
+				if (element && element.classList && !isDescendant(element, event.fromElement)) {
+            element.classList.remove('over');
+        }
+			}
+    }
+	
+		function dragEnd(event) {
+        event.target.style.opacity = '1';
+        event.target.style.cursor = 'grab';
+			c.draggingSourceElement = false;
+			$scope.$apply();
+    }
+	
+		function isDescendant(parent, child) {
+				 var node = child.parentNode;
+				 while (node != null) {
+					 //console.log(node.id);
+						 if (node == parent) {
+								 return true;
+						 }
+						 node = node.parentNode;
+				 }
+				 return false;
+		}
+	
+	$scope.$watch("c.searchFilter", function(newValue, oldValue){
+		for(var i = 0; i < c.keyArray.length; i++){
+			var element = c.keyArray[i];
+		if(newValue && newValue != oldValue){
+				if(element.stack.indexOf(newValue) >= 0){
+					c.keyArray[i].hidden = false;
+					var split = element.stack.split('.');
+					if(split.length > 1){
+						var indexOfKey = element.stack.indexOf((element.key));
+						c.keyArray =  updateParentKeys(c.keyArray, split, indexOfKey);
+					}
+				}else{
+					c.keyArray[i].hidden = true;
+				}
+			}else{
+				c.keyArray[i].hidden = false;
+			}
+		}
+		
+	});
+	
+	function updateParentKeys(array, split, indexOfKey){
+		for(var i = 0; i < indexOfKey; i++){
+			array = updateKey(array, split[i]);
+		}
+		return array;
+	}
+	
+	function updateKey(array, key){
+		for(var i = 0; i < array.length; i++){
+			if(array[i].key === key){
+				array[i].hidden = false;
+				return array;
+			}
+		}
+		return array;
+	}
+	
+	function allColumnsCompressed(table){
+		for(var i = 0; i < table.values.length; i++){
+			var column = table.values[i];
+			if(!column.compress){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	function compressOrExpandAllColumns(table, compress){
+		for(var i = 0; i < table.values.length; i++){
+			var column = table.values[i];
+			column.compress = compress;
+		}
+	}
+	
+	function buildRelationshipQuery(){
+		var query = '';
+		//name=sys_rest_message_fn^ORname=x_snc_sn_bridge_map
+		for(var i = 0; i < c.ireModel.items.length; i++){
+			var table = c.ireModel.items[i].className.value;
+			if(!query){
+				query = 'name=' + table;
+			}else{
+				query = query + '^ORname=' + table;
+			}
+		}
+		return query;
+	}
+	
+	
+	
+	
+	// end drag and drop function
+	
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>/*div {
+    border-style: solid;
+    border-width: 1px;
+}*/
+
+textarea {
+	  border-radius: 4px;
+    resize: none;
+}
+
+.paneContainer {
+	padding: 0px 5px;
+  color: #444444;
+  font-size: 15px;
+}
+
+.columnReference {
+  margin-left: 26px;
+  //color: white;
+}
+
+.columnReference p {
+	margin: 4px 4px 4px 0px;	
+}
+
+.ireModelPane {
+		border-style: solid;
+    border-radius: 3px;
+  	background-color: #eaeaea;
+  	border-color: #eaeaea;
+		max-height: 97vh;
+  	min-height: 97vh;
+    overflow: auto;
+}
+
+.tableModel {
+	  margin: 5px 0px 10px 0px;
+    padding: 6px;
+    background-color: #bdc0c4;;
+    border-radius: 4px;
+
+}
+
+.are-you-sure{
+    background-color: #ad2323;
+    border-radius: 4px;
+    padding: 0px 0px 0px 7px;
+  	margin: -6px -6px 0px;
+  	color: #f5f5f5;
+}
+.are-you-sure p {
+	font-size: 20px
+}
+
+.valueArray {
+	margin-left: 20px;
+}
+
+.columnElement {
+    padding-top: 18px;
+    background-color: white;
+    border-color: white;
+    padding-bottom: 5px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 5px;
+    padding: 10px 8px 10px 8px;
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+
+
+.addNewColumn {
+		padding-top: 5px;
+    border-color: white;
+    padding-bottom: 5px;
+    border-style: dashed;
+    border-width: 2px;
+    border-radius: 5px;
+    padding: 6px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.dropBox {
+	  border-width: 2px;
+    border-style: dashed;
+    height: 35px;
+    border-radius: 6px;
+  	text-align: center;
+}
+
+.dropBox label {
+	margin-top: 5px;
+}
+
+.payloadArrayPane {
+    border-style: solid;
+    border-radius: 3px;
+  	background-color: #eaeaea;
+  	border-color: #eaeaea;
+		max-height: 97vh;
+  	min-height: 97vh;
+    overflow: auto;
+}
+
+.customScroll::-webkit-scrollbar-track
+{
+  
+    background-color: #eaeaea;
+}
+
+.customScroll::-webkit-scrollbar
+{
+    width: 10px;
+    background-color: #eaeaea;
+}
+
+.customScroll::-webkit-scrollbar-thumb
+{
+    background-color: #959696;;
+    //border: 2px solid #555555;
+  	border-radius: 5px;
+}
+
+
+.elementBox {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    border-color: #247ba0;
+    background-color: #247ba0;
+    color: white;
+    padding: 2px 10px;
+    margin: 7px 0px;
+
+}
+
+.parentRep {
+		padding-left: 6px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    border-color: #454b4e;
+    background-color: #454b4e;
+    color: white;
+    padding: 2px 10px;
+}
+
+.slide {
+	//margin-left: 10px;
+  -webkit-transition:max-height ease-out .5s;
+  transition:max-height ease-out .5s;
+  overflow: hidden;
+  //max-height:0;
+  max-height: 255px;
+  //max-height: 100%;
+}
+
+
+/*.collapsing {
+	overflow: hidden;
+  transition: height 0.35s ease;
+  position: relative;
+  height: 0;
+}
+
+.collapse {
+ display: none;
+}
+
+.collapse.in {
+	display: block !important;
+  height: 100%;
+}*/
+
+.slide.elDetail {
+	max-height: 75px;
+  -webkit-transition:max-height ease-in .2s;
+  transition:max-height ease-in .2s;
+}
+
+
+
+.slide.ng-hide {
+  max-height: 0;
+}
+
+.slide.ng-hide-add,
+.slide.ng-hide-remove{
+  display:block!important;
+  overflow: hidden;
+}
+
+.elementDetail label {
+	width: 100%;
+  margin-left: 10px;
+}
+
+.over {
+	border-style: solid;
+  border-color: #247ba0;
+}
+
+.close-x {
+    float: right;
+    margin-right: 5px;
+    margin-top: 4px;
+    font-size: 12px;
+}
+
+.close-x:hover {
+	opacity:0.7;
+}
+
+.clear {
+    float: right;
+    margin-right: 5px;
+    
+}
+
+.clear:hover{
+	cursor: pointer;
+  text-decoration: underline;
+}
+
+button.confirm {
+		background-color: #247ba0;
+    width: 69px;
+}
+
+button.cancel {
+		background-color: #6d6d6d;
+    width: 69px;
+}
+
+.confirm-buttons{
+		padding-bottom: 6px;
+}
+
+
+.addNew {
+		font-size: 17px;
+    margin-top: 7px;
+  	margin-bottom: 0px;
+  	color: #247ba0;
+}
+
+.addNew:hover{
+	cursor: pointer;
+  //color: #d4d4d4 !important;
+  opacity: 0.7;
+}
+
+.addNew .fa-plus {
+		border-style: solid;
+    border-width: 1px;
+    padding: 2px 3px 3px 3px;
+    border-radius: 18px;
+    height: 21px;
+    width: 21px;
+}
+
+.outer-add {
+	text-align: center;
+}
+
+.column-compress-carrot {
+	  float: left;
+    margin-top: 12px;
+}
+
+
+/* Style the buttons inside the tab */
+.tab {
+  padding: 0px;
+	text-align: center;
+}
+
+.tab button {
+  background-color: inherit;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 16px;
+  width: 49%;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+  
+}
+
+.tab .selected {
+	background-color: #ddd;
+}
+
+.tab .small {
+	    padding: 6px 16px;
+}
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  //display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+#previewModal pre {
+	max-height: 78vh;
+}
+
+#previewModal .modal-header {
+	 padding-bottom: 3px;
+}
+
+.testButton {
+		width: 100%;
+    border-radius: 2px;
+    background-color: #5a7f71;
+    border-color: #80b4a0;
+    color: white;
+}
+
+.testButton:hover{
+	opacity: 90%;
+}
+
+#previewModal pre.halfHeight {
+	max-height: 39vh;
+}
+
+.analyze-new-payload{
+	  text-align: center;
+    margin-top: 42vh;
+}
+
+#search {
+  width: 79%;
+  display: unset;
+}
+
+.btn.ireButton{
+    background-color: #247ba0;
+    color: white;
+}
+.btn.ireButton:hover{
+	opacity: 90%
+}
+</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>mapping_helper</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Mapping Helper</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+
+	if(input){
+		var uiHelper = new IREMapUIHelper();
+		var ireMap = new IREMap();
+		if(input.action === 'analyzePayload' && input.payload){
+			
+			data.array = uiHelper.analyzePayload(input.payload);
+		}
+		
+		
+		if(input.action === 'getReferenceTable'){
+			data.referenceTable = uiHelper.getReferenceTable(input.table, input.element);
+		}
+		
+		if(input.action === 'previewMap' && input.map && input.payload){
+			
+			var simplifiedModel = uiHelper.constructSimplifiedMap(input.map);
+			data.simplifiedModel = simplifiedModel;
+			var relationalMap = ireMap.initializeMap(input.map);
+			var ireObj = ireMap.processObj(JSON.parse(input.payload), 'ServiceNow');
+			data.previewInput = ireObj;
+		}
+		
+		if(input.action === 'testIandR' && input.sampleInput){
+			var output = ireMap.importPayload(input.sampleInput, 'ServiceNow');
+			data.previewOutput = JSON.parse(output);
+		}
+	}
+	
+	
+	
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>erik.anderson</sys_created_by>
+        <sys_created_on>2020-05-14 13:51:19</sys_created_on>
+        <sys_id>cc2560d5db30101095ea53184b96198a</sys_id>
+        <sys_mod_count>785</sys_mod_count>
+        <sys_name>Mapping Helper</sys_name>
+        <sys_package display_value="IRE Extension" source="x_156954_ire_exten">268ef9a8dbb8101095ea53184b9619c4</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IRE Extension">268ef9a8dbb8101095ea53184b9619c4</sys_scope>
+        <sys_update_name>sp_widget_cc2560d5db30101095ea53184b96198a</sys_update_name>
+        <sys_updated_by>erik.anderson</sys_updated_by>
+        <sys_updated_on>2020-07-08 17:28:58</sys_updated_on>
+        <template><![CDATA[<div>
+    <!--<label>{{c.ireModel}}</label>-->
+    <!--<div class="col-sm-12">
+        <button type="button" class="btn btn-success" ng-click="c.previewMap()" ng-disabled="!c.payload || !c.ireModel">
+            Preview Map
+        </button>
+    </div>-->
+
+    <script>
+        //gets the angular scope from outside because 
+        //we don't have access to it for drag events
+        function getScope() {
+            return angular.element('#drag-n-drop').scope().c;
+        }
+    </script>
+    <!--<label>{{c.ireModel}}</label>-->
+    <div class="col-sm-5 paneContainer">
+      
+      
+      
+        <div class="col-sm-12 payloadArrayPane customScroll">
+          <div class="col-sm-12 analyze-new-payload" ng-if="!c.keyArray">
+        		<h4>
+              Insert a sample payload to start so you can begin creating a new IRE map.
+            </h4>
+            <button type="button" class="btn ireButton" data-toggle="modal" data-target="#priamryModal">Load Payload</button>
+ 
+      		</div>
+          <div  ng-if="c.keyArray && c.keyArray.length > 1">
+            <input type="input" class="form-control" ng-model="c.searchFilter" id="search" placeholder="Search">
+             <button type="button" class="btn ireButton" data-toggle="modal" data-target="#priamryModal" style="width: 20%">
+              New Payload
+            </button>
+
+            <div class="col-sm">
+                <div ng-hide="element.hidden" id="{{$index}}" ng-attr-draggable="{{!element.parentRep}}"
+                    ondragend="getScope().dragEnd(event)" ondragstart="angular.element(this).scope().c.drag(event)"
+                    ng-class="{'elementBox canDrag' : !element.parentRep, 'parentRep': element.parentRep}"
+                    ng-repeat="element in c.keyArray" ng-style="{'margin-left': element.level * 30}">
+                    <div ng-if="!element.parentRep" ng-click="element.showDetails = !element.showDetails">
+                        <div class="col-sm">
+                            <i
+                                ng-class="{'fa fa-caret-right' : !element.showDetails , 'fa fa-caret-down' : element.showDetails}"></i>
+                            <label>{{element.key}}</label>
+                        </div>
+                        <div class="col-sm elementDetail slide elDetail" ng-hide="!element.showDetails">
+                            <label><strong>Stack:</strong> {{element.stack}}</label>
+                            <label><strong>Value:</strong> {{element.value}}</label>
+                            <label><strong>Type:</strong> {{element.type}}</label>
+                        </div>
+                    </div>
+                    <div ng-if="element.parentRep" ng-click="c.showHideChildElements(element)">
+                        <div class="col-sm">
+                            <i
+                                ng-class="{'fa fa-caret-right' : !element.showDetails , 'fa fa-caret-down' : element.showDetails}"></i>
+                            <label>{{element.key}}</label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+          </div>
+            
+        </div>
+    </div>
+
+    <div id="drag-n-drop" class="col-sm-7 paneContainer">
+      	
+      
+        <div class="col-sm-12 ireModelPane customScroll">
+            <!--<button type="button" class="btn btn-info" ng-click="c.addNewTable()">New Table</button>-->
+          <div class="col-sm-12" style="padding:0px;">
+             <div class="tab col-sm-10">
+                    <button
+                        ng-class="{'tablinks selected small' : c.modalPaneType ==='Tables' , 'tablinks small': c.modalPaneType !== 'Tables'}"
+                        ng-click="c.modalPaneType ='Tables'">Tables</button>
+                    <button
+                        ng-class="{'tablinks selected small' : c.modalPaneType ==='Relationships' , 'tablinks small': c.modalPaneType !== 'Relationships'}"
+                        ng-click="c.modalPaneType ='Relationships'">Relationships</button>
+                </div>
+           <button type="button" class="btn ireButton col-sm-2" ng-click="c.previewMap()" ng-disabled="!c.payload || !c.ireModel" style="width:%9">
+            Preview Map
+        </button>
+          </div>
+           
+            
+
+            <div class="col-sm">
+                <div class="tableOptions" ng-if="c.modalPaneType === 'Tables'">
+                    <div class="outer-add">
+                        <label style="color: #247ba0;" class="addNew" ng-click="c.addNewTable()"><i class="fa fa-plus"
+                                aria-hidden="true"></i> Add New Table</label>
+                    </div>
+                    <div ng-init="parentIndex = $index" class="tableModel" ng-repeat="table in c.ireModel.items">
+                        <div class="col-sm table-header">
+    
+                            <div class="are-you-sure slide" ng-hide="!table.confirmDelete">
+                                <p>Are you sure you want to remove this table from the model? All child elements will be
+                                    removed as well.</p>
+                                <div class="confirm-buttons">
+                                    <button type="button" class="btn confirm"
+                                        ng-click="c.deleteTable(c.ireModel.items, $index)">
+                                        Yes
+                                    </button>
+                                    <button type="button" class="btn cancel" ng-click="table.confirmDelete = false">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                            <label ng-click="table.compress = !table.compress"><i
+                                    ng-class="{'fa fa-caret-right' : table.compress , 'fa fa-caret-down' : !table.compress}"></i>
+                                Target Table</label>
+                            <i class="fa fa-times close-x" ng-click="table.confirmDelete = true"
+                                ng-if="!table.confirmDelete"></i>
+                        </div>
+    
+                        <sn-record-picker field="table.className" table="'sys_db_object'" display-field="'label'"
+                            display-fields="'name'" value-field="'name'" search-fields="'label,name'" page-size="100">
+                        </sn-record-picker>
+                        <!--<button type="button" class="btn btn-info" ng-click="c.addNewColumn(table)">New Column</button>-->
+    
+    
+    
+    
+    
+    
+                        <div class="valueArray" ng-hide="table.compress">
+                            <div class="outer-add">
+                                <i ng-class="{'fa fa-caret-right column-compress-carrot' : c.allColumnsCompressed(table) , 'fa fa-caret-down column-compress-carrot' : !c.allColumnsCompressed(table)}"
+                                    ng-click="c.compressOrExpandAllColumns(table, !c.allColumnsCompressed(table))"></i>
+                                <label class="addNew" ng-click="c.addNewColumn(table)" style="    margin-right: 24px;"><i class="fa fa-plus"
+                                        aria-hidden="true"></i> Add New Column</label>
+                            </div>
+    
+                            <div id="{{parentIndex + '.new'}}" ng-if="c.draggingSourceElement"
+                                ondragleave="getScope().dragLeave(this, event)" ondragenter="getScope().dragEnter(this)"
+                                ondragover="getScope().dragOver(event)" class="addNewColumn"
+                                ondrop="angular.element(this).scope().c.drop(event, this)"
+                                ondragover="angular.element(this).scope().c.allowDrop(event)">
+                                <h4>
+                                    Add New Column
+                                </h4>
+                            </div>
+    
+    
+                            <div id="{{parentIndex + '.' +$index}}" ondragleave="getScope().dragLeave(this, event)"
+                                ondragenter="getScope().dragEnter(this)" ondragover="getScope().dragOver(event)"
+                                class="columnElement" ondrop="angular.element(this).scope().c.drop(event, this)"
+                                ondragover="angular.element(this).scope().c.allowDrop(event)"
+                                ng-repeat="column in table.values">
+    
+                                <div class="col-sm" ng-click="column.compress = !column.compress">
+    
+                                    <div ng-hide="column.compress">
+                                        <i 
+                                            ng-class="{'fa fa-caret-right' : column.compress , 'fa fa-caret-down' : !column.compress}"></i>
+                                        <label style="cursor: pointer">Source Location</label>
+                                        <i class="fa fa-times close-x" ng-click="c.deleteColumn(table.values, $index)"></i>
+                                    </div>
+                                    <div ng-hide="!column.compress">
+                                        <i 
+                                            ng-class="{'fa fa-caret-right' : column.compress , 'fa fa-caret-down' : !column.compress}"></i>
+                                        <label style="cursor: pointer">{{column.objectKey.stack || 'Undefined'}} <i class="fa fa-long-arrow-right"
+                                                aria-hidden="true"></i>
+                                            {{column.column.displayValue || 'Undefined'}}</label>
+                                        <!--<label>Source: {{column.objectKey.stack}}</label>
+                    <label>Target: {{column.column.displayValue}}</label>-->
+                                        <i class="fa fa-times close-x" ng-click="c.deleteColumn(table.values, $index)"></i>
+                                    </div>
+    
+                                </div>
+    
+                                <div class="slide" ng-hide="column.compress">
+                                    <div class="elementBox"
+                                        ng-click="column.objectKey.showDetails = !column.objectKey.showDetails"
+                                        ng-hide="!column.objectKey.stack">
+                                        <div class="col-sm">
+                                            <i
+                                                ng-class="{'fa fa-caret-right' : !column.objectKey.showDetails , 'fa fa-caret-down' : column.objectKey.showDetails}"></i>
+                                            <label>{{column.objectKey.stack}}</label>
+                                            <!--<i class="fa fa-times close-x" ng-click="column.objectKey = {}"></i>-->
+                                            <label class="clear" ng-click="column.objectKey = {}">clear</label>
+                                        </div>
+                                        <div class="col-sm elementDetail slide elDetail"
+                                            ng-hide="!column.objectKey.showDetails">
+                                            <label><strong>Key Name:</strong> {{column.objectKey.key}}</label>
+                                            <label><strong>Value:</strong> {{column.objectKey.value}}</label>
+                                            <label><strong>Type:</strong> {{column.objectKey.type}}</label>
+                                        </div>
+                                    </div>
+    
+                                    <div class="dropBox" ng-hide="column.objectKey.stack">
+                                        <label>Drop A Source Element Here</label>
+                                    </div>
+    
+                                    <label>Target Column</label>
+                                    <sn-record-picker field="column.column" table="'sys_dictionary'"
+                                        display-field="'column_label'" display-fields="'element'" value-field="'element'"
+                                        search-fields="'column_label,element'" page-size="100"
+                                        default-query="'name='+table.className.value"></sn-record-picker>
+                                    <div class="columnReference" ng-if="column.column.referenceTable">
+                                        <p>The target column is a reference field on table
+                                            <strong>{{column.column.referenceTable}}</strong>. Select a reference qualifier
+                                            field</p>
+                                        <sn-record-picker field="column.column.referenceField" table="'sys_dictionary'"
+                                            display-field="'column_label'" display-fields="'element'"
+                                            value-field="'element'" search-fields="'column_label,element'" page-size="100"
+                                            default-query="'name='+column.column.referenceTable"></sn-record-picker>
+                                    </div>
+                                </div>
+                            </div>
+    
+    
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relationshipOptions" ng-if="c.modalPaneType === 'Relationships'" > 
+                    <div class="outer-add">
+                        <label style="color: #247ba0;" class="addNew" ng-click="c.addNewRelationship()"><i
+                                class="fa fa-plus"></i> Add New Relationship</label>
+                    </div>
+                    <div class="tableModel" ng-repeat="relationship in c.ireModel.relations">
+                        <i ng-class="{'fa fa-caret-right' : relationship.compress , 'fa fa-caret-down' : !relationship.compress}"
+                            ng-click="relationship.compress = !relationship.compress"></i>
+                        <i class="fa fa-times close-x"
+                            ng-click="c.deleteRelationship(c.ireModel.relations, $index)"></i>
+                        <label>Parent Table</label>
+                        <sn-record-picker field="relationship.parent" table="'sys_db_object'" display-field="'label'"
+                            display-fields="'name'" value-field="'name'" search-fields="'label,name'"
+                            default-query="c.buildRelationshipQuery()" page-size="100">
+                        </sn-record-picker>
+
+                        <label>Child Table</label>
+                        <sn-record-picker field="relationship.child" table="'sys_db_object'" display-field="'label'"
+                            display-fields="'name'" value-field="'name'" search-fields="'label,name'"
+                            default-query="c.buildRelationshipQuery()" page-size="100">
+                        </sn-record-picker>
+                        <div class="slide" ng-hide="relationship.compress">
+                            <div style="margin-left:26px;" ng-if="relationship.child.value">
+                                <label>Child Reference Field</label>
+                                <sn-record-picker field="relationship.child.referenceField" table="'sys_dictionary'"
+                                    display-field="'column_label'" display-fields="'element'" value-field="'element'"
+                                    search-fields="'column_label,element'" page-size="100"
+                                    default-query="'internal_type=reference^name='+relationship.child.value">
+                                </sn-record-picker>
+                            </div>
+
+                            <label>Relationship Type</label>
+                            <sn-record-picker field="relationship.type" table="'cmdb_rel_type'" display-field="'label'"
+                                value-field="'name'" search-fields="'name'" page-size="100">
+                            </sn-record-picker>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+
+<div class="modal fade" id="priamryModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Analyze Paylod</h4>
+            </div>
+            <div class="modal-body">
+                <p><strong>Paste you example payload here and click analyze.</strong></p>
+                <textarea rows="20" cols="91" ng-model="c.payload"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" ng-click="c.analyzePayload(c.payload)">Analyze</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="modal fade" id="previewModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="tab">
+                    <button
+                        ng-class="{'tablinks selected' : c.previewTab ==='Preview' , 'tablinks': c.previewTab !== 'Preview'}"
+                        ng-click="c.previewTab ='Preview'">Map Preview</button>
+                    <button
+                        ng-class="{'tablinks selected' : c.previewTab ==='Input' , 'tablinks': c.previewTab !== 'Input'}"
+                        ng-click="c.previewTab ='Input'">Sample IRE Input</button>
+                </div>
+
+            </div>
+            <div class="modal-body">
+                <div ng-if="c.previewTab === 'Preview'">
+                    <pre class="customScroll">{{c.simplifiedModel | json}}</pre>
+                </div>
+
+                <div ng-if="c.previewTab === 'Input'">
+                    <pre
+                        ng-class="{'halfHeight customScroll' : c.previewOutput, 'customScroll': !c.previewOutput}">{{c.previewInput | json}}</pre>
+
+                    <div ng-if="c.previewOutput">
+                        <label>IRE Output</label>
+                        <pre class="customScroll" style="max-height: 39vh">{{c.previewOutput | json}}</pre>
+                    </div>
+
+
+                    <button ng-if="!c.previewOutput" class="btn testButton" ng-click="c.testIandR()">
+                        Test Identify and Reconcile
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

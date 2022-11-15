@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_156954_ire_exten.IREMap</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>IREMap</name>
+        <script><![CDATA[var IREMap = Class.create();
+IREMap.prototype = {
+    initialize: function(map) {
+        this.processor = new MapProcessor();
+        if(map){
+            this.initializeMap(map);
+        }
+    },
+
+    initializeMap: function(map){
+        var standardMap = this.processor.standardizeItems(map.items);
+        //gs.info(JSON.stringify(standardMap));
+		var relationships = this.processor.standardizeRelationships(map.relations);
+        //gs.info(JSON.stringify(relationships))
+        var relationalMap = this.processor.nestRelationships2(standardMap, relationships);
+		gs.info('ERIK: ' + JSON.stringify(relationalMap));
+        this.map = relationalMap;
+        return relationalMap;
+    },
+
+    processAndImportObj: function(obj, discoverySource){
+        if(this.map){
+            var payloadObj = this.processObj(obj);
+            var output = this.importPayload(payloadObj, discoverySource);
+            return output;
+        }
+    },
+	
+	processObj: function(obj) {
+        if(this.map){
+            var array = this.processor.processObject(this.map, obj);
+			gs.info('ERIK: ' + JSON.stringify(array));
+            var ireObj = this.processor.formatArrayForIRE(array);
+            return ireObj;
+        }
+    },
+    
+    importPayload: function(payload, discoverySource){
+        var input = JSON.stringify(payload);
+        var output = sn_cmdb.IdentificationEngine.createOrUpdateCI(discoverySource, input);
+        return output;
+    },
+
+
+    type: IREMap
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>erik.anderson</sys_created_by>
+        <sys_created_on>2020-05-12 12:38:24</sys_created_on>
+        <sys_id>cc8f7d6cdbb8101095ea53184b961943</sys_id>
+        <sys_mod_count>42</sys_mod_count>
+        <sys_name>IREMap</sys_name>
+        <sys_package display_value="IRE Extension" source="x_156954_ire_exten">268ef9a8dbb8101095ea53184b9619c4</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="IRE Extension">268ef9a8dbb8101095ea53184b9619c4</sys_scope>
+        <sys_update_name>sys_script_include_cc8f7d6cdbb8101095ea53184b961943</sys_update_name>
+        <sys_updated_by>erik.anderson</sys_updated_by>
+        <sys_updated_on>2020-07-08 17:54:52</sys_updated_on>
+    </sys_script_include>
+</record_update>
