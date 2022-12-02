@@ -1310,14 +1310,11 @@ button.cancel {
         <sys_created_by>erik.anderson</sys_created_by>
         <sys_created_on>2020-05-14 13:51:19</sys_created_on>
         <sys_id>cc2560d5db30101095ea53184b96198a</sys_id>
-        <sys_mod_count>785</sys_mod_count>
         <sys_name>Mapping Helper</sys_name>
-        <sys_package display_value="IRE Extension" source="x_156954_ire_exten">268ef9a8dbb8101095ea53184b9619c4</sys_package>
+        <sys_package display_value="JSON to IRE" source="x_156954_ire_exten">268ef9a8dbb8101095ea53184b9619c4</sys_package>
         <sys_policy/>
-        <sys_scope display_value="IRE Extension">268ef9a8dbb8101095ea53184b9619c4</sys_scope>
+        <sys_scope display_value="JSON to IRE">268ef9a8dbb8101095ea53184b9619c4</sys_scope>
         <sys_update_name>sp_widget_cc2560d5db30101095ea53184b96198a</sys_update_name>
-        <sys_updated_by>erik.anderson</sys_updated_by>
-        <sys_updated_on>2020-07-08 17:28:58</sys_updated_on>
         <template><![CDATA[<div>
     <!--<label>{{c.ireModel}}</label>-->
     <!--<div class="col-sm-12">
@@ -1600,7 +1597,7 @@ button.cancel {
             </div>
             <div class="modal-body">
                 <p><strong>Paste you example payload here and click analyze.</strong></p>
-                <textarea rows="20" cols="91" ng-model="c.payload"></textarea>
+                <textarea rows="20" cols="87" ng-model="c.payload"></textarea>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_action_type_definition">
+    <sys_hub_action_type_definition action="DELETE">
+        <access>public</access>
+        <acls/>
+        <action_template/>
+        <active>true</active>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description/>
+        <ih_action>false</ih_action>
+        <internal_name>super_custom_action</internal_name>
+        <label_cache/>
+        <latest_snapshot/>
+        <master_snapshot/>
+        <name>super custom action</name>
+        <natlang/>
+        <outputs/>
+        <state>draft</state>
+        <sys_class_name>sys_hub_action_type_definition</sys_class_name>
+        <sys_created_by>erik.anderson</sys_created_by>
+        <sys_created_on>2020-06-15 21:50:50</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>a4c5cfe72f59d410a8ce2b5df699b610</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>super custom action</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="IRE Extension" source="x_156954_ire_exten">268ef9a8dbb8101095ea53184b9619c4</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IRE Extension">268ef9a8dbb8101095ea53184b9619c4</sys_scope>
+        <sys_update_name>sys_hub_action_type_definition_a4c5cfe72f59d410a8ce2b5df699b610</sys_update_name>
+        <sys_updated_by>erik.anderson</sys_updated_by>
+        <sys_updated_on>2020-06-15 21:50:50</sys_updated_on>
+        <system_level>false</system_level>
+        <type/>
+    </sys_hub_action_type_definition>
+    <sys_translated_text action="DELETE" query="documentkey=a4c5cfe72f59d410a8ce2b5df699b610"/>
+    <sys_variable_value action="DELETE" query="document_key=a4c5cfe72f59d410a8ce2b5df699b610"/>
+<sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="JSON to IRE">268ef9a8dbb8101095ea53184b9619c4</application>
+        <file_path/>
+        <instance_id>1a082fb5db0d7b849df22f17d4961995</instance_id>
+        <instance_name>dev83910</instance_name>
+        <name>sys_hub_action_type_definition_a4c5cfe72f59d410a8ce2b5df699b610</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_action_type_definition">
+    <sys_hub_action_type_definition action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <action_template/>
+        <active>true</active>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from/>
+        <copied_from_name/>
+        <description/>
+        <ih_action>false</ih_action>
+        <internal_name>super_custom_action</internal_name>
+        <label_cache/>
+        <latest_snapshot/>
+        <master_snapshot/>
+        <name>super custom action</name>
+        <natlang/>
+        <outputs/>
+        <state>draft</state>
+        <sys_class_name>sys_hub_action_type_definition</sys_class_name>
+        <sys_created_by>erik.anderson</sys_created_by>
+        <sys_created_on>2020-06-15 21:50:50</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>a4c5cfe72f59d410a8ce2b5df699b610</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>super custom action</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="IRE Extension" source="x_156954_ire_exten">268ef9a8dbb8101095ea53184b9619c4</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IRE Extension">268ef9a8dbb8101095ea53184b9619c4</sys_scope>
+        <sys_update_name>sys_hub_action_type_definition_a4c5cfe72f59d410a8ce2b5df699b610</sys_update_name>
+        <sys_updated_by>erik.anderson</sys_updated_by>
+        <sys_updated_on>2020-06-15 21:50:50</sys_updated_on>
+        <system_level>false</system_level>
+        <type/>
+    </sys_hub_action_type_definition>
+    <sys_translated_text action="delete_multiple" query="documentkey=a4c5cfe72f59d410a8ce2b5df699b610"/>
+    <sys_variable_value action="delete_multiple" query="document_key=a4c5cfe72f59d410a8ce2b5df699b610"/>
+</record_update>]]></payload>
+        <payload_hash>-757663136</payload_hash>
+        <record_name>super custom action</record_name>
+        <reverted_from/>
+        <source>7527f9a92f83551003377f572799b6df</source>
+        <source_table>sys_upgrade_history</source_table>
+        <state>current</state>
+        <sys_created_by>erik.anderson</sys_created_by>
+        <sys_created_on>2022-11-08 19:34:05</sys_created_on>
+        <sys_id>16273da92f83551003377f572799b618</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>18458bc484e0000001</sys_recorded_at>
+        <sys_updated_by>erik.anderson</sys_updated_by>
+        <sys_updated_on>2022-11-08 19:34:05</sys_updated_on>
+        <type>Action Type</type>
+        <update_guid>d2273da96f83551095a79a8a6234bd18</update_guid>
+        <update_guid_history>d2273da96f83551095a79a8a6234bd18:-757663136</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>erik.anderson</sys_created_by>
+        <sys_created_on>2022-12-02 15:54:35</sys_created_on>
+        <sys_db_object display_value="" name="sys_hub_action_type_definition">sys_hub_action_type_definition</sys_db_object>
+        <sys_id>4da5561b545f4a63ad2ca620096ceb01</sys_id>
+        <sys_metadata>a4c5cfe72f59d410a8ce2b5df699b610</sys_metadata>
+        <sys_name>super custom action</sys_name>
+        <sys_package display_value="JSON to IRE" source="x_156954_ire_exten">268ef9a8dbb8101095ea53184b9619c4</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="JSON to IRE">268ef9a8dbb8101095ea53184b9619c4</sys_scope>
+        <sys_scope_delete display_value="">59d8130f12214fc093409d2c3163d010</sys_scope_delete>
+        <sys_update_name>sys_hub_action_type_definition_a4c5cfe72f59d410a8ce2b5df699b610</sys_update_name>
+        <sys_update_version display_value="sys_hub_action_type_definition_a4c5cfe72f59d410a8ce2b5df699b610">16273da92f83551003377f572799b618</sys_update_version>
+    </sys_metadata_delete>
+</record_update>
